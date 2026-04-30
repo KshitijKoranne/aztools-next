@@ -13,7 +13,6 @@ import { toast } from "sonner";
 const ADJ = ["awesome","cool","brilliant","clever","dynamic","epic","fierce","bold","swift","smart","quick","strong","brave","cosmic","neon","quantum","prime","elite","alpha"];
 const NOUNS = ["warrior","ninja","wizard","hero","legend","champion","eagle","tiger","wolf","fox","hawk","dragon","phoenix","storm","ghost","pixel","byte","dev","core"];
 const TECH = ["dev","code","hack","tech","byte","bit","pixel","data","node","web","app","git","vim","rust","go","ml","ai","cloud","edge"];
-const VOWELS = "aeiou", CONSONANTS = "bcdfghjklmnpqrstvwxyz";
 const rand = <T,>(arr: T[]) => arr[Math.floor(Math.random() * arr.length)]!;
 const rnd = (min: number, max: number) => Math.floor(Math.random() * (max - min + 1)) + min;
 
