@@ -308,14 +308,7 @@ export const tools: Tool[] = [
     icon: FileText,
     path: "/tools/csv-viewer"
   },
-  {
-    id: "api-tester",
-    name: "API Tester",
-    description: "Test and debug API endpoints with various HTTP methods.",
-    category: "developer-tools",
-    icon: ExternalLink,
-    path: "/tools/api-tester"
-  },
+
   {
     id: "code-beautifier",
     name: "Code Beautifier",
@@ -984,14 +977,6 @@ export const tools: Tool[] = [
   },
 
   // Additional Developer Tools
-  {
-    id: "http-headers-viewer",
-    name: "HTTP Headers Viewer",
-    description: "Analyze HTTP response headers, security configuration, and CORS policies for any website.",
-    category: "developer-tools",
-    icon: Globe,
-    path: "/tools/http-headers-viewer"
-  },
   {
     id: "json-to-typescript",
     name: "JSON to TypeScript Interface",
