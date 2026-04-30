@@ -1,0 +1,47 @@
+import Link from "next/link";
+import { ArrowLeft } from "lucide-react";
+
+import { Button } from "@/components/ui/button";
+import { MainLayout } from "@/components/layouts/main-layout";
+import { getToolById, getCategoryById } from "@/data/tools";
+
+interface ToolLayoutProps {
+  toolId: string;
+  children: React.ReactNode;
+}
+
+export function ToolLayout({ toolId, children }: ToolLayoutProps) {
+  const tool = getToolById(toolId);
+  const category = tool ? getCategoryById(tool.category) : null;
+
+  return (
+    <MainLayout>
+      <div className="container mx-auto px-4 py-8">
+        <div className="mb-8">
+          <div className="flex items-center mb-4">
+            <Button variant="ghost" size="icon" asChild className="mr-2">
+              <Link
+                href={category ? `/category/${category.id}` : "/"}
+                aria-label={category ? `Back to ${category.name}` : "Back to home"}
+              >
+                <ArrowLeft className="h-5 w-5" />
+              </Link>
+            </Button>
+            {category && (
+              <Link
+                href={`/category/${category.id}`}
+                className="text-sm text-muted-foreground hover:text-primary transition-colors"
+              >
+                {category.name}
+              </Link>
+            )}
+          </div>
+          <h1 className="text-3xl font-bold tracking-tight">{tool?.name}</h1>
+          <p className="mt-1 text-muted-foreground">{tool?.description}</p>
+        </div>
+
+        <div>{children}</div>
+      </div>
+    </MainLayout>
+  );
+}
