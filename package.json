@@ -1,6 +1,6 @@
 {
-  "name": "aztools-next-fresh",
-  "version": "0.1.0",
+  "name": "aztools-next",
+  "version": "1.0.0",
   "private": true,
   "scripts": {
     "dev": "next dev",
