@@ -29,13 +29,18 @@ export default function Client() {
 
   useEffect(() => {
     if (timerRunning && timerTime > 0) {
-      timerRef.current = setInterval(() => setTimerTime((t) => t - 1), 1000);
+      timerRef.current = setInterval(() => {
+        setTimerTime((t) => {
+          if (t <= 1) {
+            setTimerRunning(false);
+            toast.success("Timer complete!");
+            return 0;
+          }
+          return t - 1;
+        });
+      }, 1000);
     } else {
       if (timerRef.current) clearInterval(timerRef.current);
-      if (timerRunning && timerTime === 0) {
-        setTimerRunning(false);
-        toast.success("Timer complete!");
-      }
     }
     return () => { if (timerRef.current) clearInterval(timerRef.current); };
   }, [timerRunning, timerTime]);
