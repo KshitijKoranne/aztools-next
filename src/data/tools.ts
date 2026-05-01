@@ -243,6 +243,14 @@ export const tools: Tool[] = [
     path: "/tools/json-formatter"
   },
   {
+    id: "json-path-finder",
+    name: "JSON Path Finder",
+    description: "Search JSON and copy exact object paths for matching keys and values.",
+    category: "developer-tools",
+    icon: Braces,
+    path: "/tools/json-path-finder"
+  },
+  {
     id: "svg-code-generator",
     name: "SVG Code Generator",
     description: "Create and generate SVG graphics with visual editor and live code output.",
@@ -348,6 +356,14 @@ export const tools: Tool[] = [
     path: "/tools/css-formatter"
   },
   {
+    id: "css-clamp-generator",
+    name: "CSS Clamp Generator",
+    description: "Generate responsive clamp() values for fluid typography and spacing.",
+    category: "developer-tools",
+    icon: Code2,
+    path: "/tools/css-clamp-generator"
+  },
+  {
     id: "markdown-to-html",
     name: "Markdown to HTML",
     description: "Convert Markdown text to HTML with live preview support.",
@@ -438,6 +454,14 @@ export const tools: Tool[] = [
     category: "calculators",
     icon: Ruler,
     path: "/tools/unit-converter"
+  },
+  {
+    id: "number-base-converter",
+    name: "Number Base Converter",
+    description: "Convert numbers between decimal, binary, hexadecimal, and octal bases.",
+    category: "calculators",
+    icon: Hash,
+    path: "/tools/number-base-converter"
   },
   {
     id: "percentage-calculator",
@@ -636,6 +660,14 @@ export const tools: Tool[] = [
     category: "image-tools",
     icon: Crop,
     path: "/tools/image-resizer"
+  },
+  {
+    id: "aspect-ratio-calculator",
+    name: "Aspect Ratio Calculator",
+    description: "Calculate missing image, video, and layout dimensions from a ratio.",
+    category: "image-tools",
+    icon: Ruler,
+    path: "/tools/aspect-ratio-calculator"
   },
   {
     id: "image-converter",
