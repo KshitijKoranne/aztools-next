@@ -18,19 +18,22 @@ export function CategoryCard({
 }: CategoryCardProps) {
   return (
     <Link href={`/category/${id}`} className="block group">
-      <div className="rounded-lg border bg-card text-card-foreground p-5 h-full transition-all hover:border-primary/50 hover:shadow-md">
-        <div className="flex justify-between items-start mb-3">
-          <div className="bg-primary/10 rounded-md p-2 text-primary">
+      <div className="az-card h-full p-5 text-card-foreground">
+        <div className="relative z-10 flex justify-between items-start mb-5">
+          <div className="rounded-md border bg-background/70 p-2 text-primary shadow-sm">
             <Icon className="h-5 w-5" />
           </div>
-          <div className="text-xs bg-muted inline-block px-2 py-1 rounded-md text-muted-foreground">
+          <div className="rounded-full border bg-background/70 px-2.5 py-1 font-mono text-[11px] font-semibold uppercase text-muted-foreground">
             {toolCount} {toolCount === 1 ? "tool" : "tools"}
           </div>
         </div>
-        <h3 className="font-medium text-lg mb-1 group-hover:text-primary transition-colors">
+        <h3 className="relative z-10 mb-2 text-xl font-black leading-tight group-hover:text-primary transition-colors">
           {name}
         </h3>
-        <p className="text-sm text-muted-foreground">{description}</p>
+        <p className="relative z-10 text-sm leading-6 text-muted-foreground">{description}</p>
+        <div className="relative z-10 mt-5 h-1.5 overflow-hidden rounded-full bg-muted">
+          <div className="h-full w-2/3 rounded-full bg-[linear-gradient(90deg,var(--az-mint),var(--az-blue),var(--az-coral))]" />
+        </div>
       </div>
     </Link>
   );

@@ -84,23 +84,24 @@ export default async function CategoryPage({ params }: { params: Params }) {
           },
         ])}
       />
-      <div className="container mx-auto px-4 py-8">
-        <div className="flex items-center mb-8">
-          <Button variant="ghost" size="icon" asChild className="mr-4">
+      <div className="container mx-auto px-4 py-10">
+        <div className="az-chrome mb-8 flex items-center rounded-lg p-4 md:p-6">
+          <Button variant="ghost" size="icon" asChild className="mr-4 rounded-md">
             <Link href="/" aria-label="Back to home">
               <ArrowLeft className="h-5 w-5" />
             </Link>
           </Button>
           <div>
-            <h1 className="text-3xl font-bold tracking-tight">{category.name}</h1>
-            <p className="text-muted-foreground">{category.description}</p>
+            <div className="az-section-label mb-2">Category</div>
+            <h1 className="text-4xl font-black leading-tight">{category.name}</h1>
+            <p className="mt-1 text-muted-foreground">{category.description}</p>
           </div>
         </div>
 
         {tools.length === 0 ? (
           <p className="text-muted-foreground">No tools in this category yet.</p>
         ) : (
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
             {tools.map((tool) => (
               <ToolCard
                 key={tool.id}

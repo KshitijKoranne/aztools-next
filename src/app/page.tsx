@@ -26,13 +26,14 @@ export default function Home() {
       />
       <HomeHero />
 
-      <section className="py-12">
+      <section className="py-14">
         <div className="container mx-auto px-4">
           <div className="mb-8">
-            <h2 className="text-3xl font-bold tracking-tight mb-3">Categories</h2>
-            <p className="text-muted-foreground">Browse our tools by category</p>
+            <div className="az-section-label mb-3">Tool map</div>
+            <h2 className="text-4xl font-black leading-tight md:text-5xl">Pick a lane. Ship the task.</h2>
+            <p className="mt-3 max-w-2xl text-muted-foreground">Organized utilities for PDFs, images, text, code, SEO, security, finance, and daily operations.</p>
           </div>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
             {categories.map((category) => (
               <CategoryCard
                 key={category.id}
@@ -47,23 +48,22 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="border-t py-12">
+      <section className="border-t py-14">
         <div className="container mx-auto px-4">
           <div className="mb-8">
-            <h2 className="text-2xl font-bold tracking-tight mb-3">Popular Free Online Tools</h2>
-            <p className="text-muted-foreground">
-              Fast browser-friendly utilities for PDFs, images, text, code, SEO, security, finance, and everyday work.
-            </p>
+            <div className="az-section-label mb-3">Fast openers</div>
+            <h2 className="text-3xl font-black leading-tight md:text-4xl">Start where the work usually starts.</h2>
+            <p className="mt-3 max-w-2xl text-muted-foreground">A quick wall of high-use tools, kept browser-friendly and direct.</p>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
             {featuredTools.map((tool) => (
               <Link
                 key={tool.id}
                 href={tool.path}
-                className="rounded-md border p-4 transition-colors hover:bg-accent"
+                className="az-card group p-4"
               >
-                <h3 className="font-medium">{tool.name}</h3>
-                <p className="mt-1 text-sm text-muted-foreground">{tool.description}</p>
+                <h3 className="relative z-10 font-black group-hover:text-primary">{tool.name}</h3>
+                <p className="relative z-10 mt-2 text-sm leading-6 text-muted-foreground">{tool.description}</p>
               </Link>
             ))}
           </div>

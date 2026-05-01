@@ -62,20 +62,22 @@ export function Header() {
 
   return (
     <header
-      className={`sticky top-0 z-50 w-full border-b bg-background/80 backdrop-blur-sm transition-shadow duration-200 ${
-        isScrolled ? "shadow-sm" : ""
+      className={`sticky top-0 z-50 w-full border-b bg-background/74 backdrop-blur-xl transition-shadow duration-200 ${
+        isScrolled ? "shadow-[0_18px_70px_-54px_rgba(15,23,42,0.9)]" : ""
       }`}
     >
       <div className="container mx-auto flex h-16 items-center justify-between px-4">
-        <Link href="/" className="flex items-center gap-2 font-bold text-xl">
-          <Image
-            src="/favicon-32x32.png"
-            alt="AZ Tools Logo"
-            width={32}
-            height={32}
-            className="h-8 w-8"
-            priority
-          />
+        <Link href="/" className="group flex items-center gap-2 text-xl font-black">
+          <span className="relative flex h-9 w-9 items-center justify-center overflow-hidden rounded-md border bg-foreground text-background shadow-sm">
+            <Image
+              src="/favicon-32x32.png"
+              alt="AZ Tools Logo"
+              width={32}
+              height={32}
+              className="h-7 w-7 transition-transform group-hover:scale-110"
+              priority
+            />
+          </span>
           <span>
             <span className="text-primary">AZ</span>
             <span>Tools</span>
@@ -88,35 +90,36 @@ export function Header() {
               <input
                 type="search"
                 placeholder="Search tools..."
-                className="md:w-[200px] lg:w-[300px] flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
+                className="h-10 w-full rounded-md border border-input bg-background/70 px-9 py-2 font-mono text-sm shadow-inner placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring md:w-[240px] lg:w-[360px]"
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
               />
+              <Search className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-primary" />
               <button
                 type="submit"
                 aria-label="Search"
-                className="absolute right-3 top-1/2 -translate-y-1/2"
+                className="absolute right-2 top-1/2 -translate-y-1/2 rounded border bg-muted px-1.5 py-0.5 font-mono text-[10px] font-bold text-muted-foreground"
               >
-                <Search className="h-4 w-4 text-muted-foreground" />
+                GO
               </button>
 
               {isSearching && searchResults.length > 0 && (
-                <div className="absolute top-full left-0 right-0 mt-1 bg-popover text-popover-foreground border rounded-md shadow-xl z-50 max-h-[400px] overflow-auto">
+                <div className="az-chrome absolute left-0 right-0 top-full z-50 mt-2 max-h-[430px] overflow-auto rounded-lg p-2 text-popover-foreground">
                   {searchResults.map((tool) => (
                     <button
                       key={tool.id}
                       type="button"
-                      className="group w-full text-left px-4 py-2 hover:bg-accent transition-colors border-b last:border-b-0"
+                      className="group w-full rounded-md px-3 py-2 text-left transition-colors hover:bg-accent"
                       onClick={() => handleSearchItemClick(tool.path)}
                     >
-                      <div className="font-medium">{tool.name}</div>
-                      <div className="text-xs text-muted-foreground">{tool.description}</div>
+                      <div className="font-bold group-hover:text-primary">{tool.name}</div>
+                      <div className="mt-0.5 line-clamp-1 text-xs text-muted-foreground">{tool.description}</div>
                     </button>
                   ))}
                   {totalResults > 10 && (
                     <button
                       type="button"
-                      className="w-full px-4 py-3 text-center border-t bg-muted hover:bg-accent transition-colors text-sm"
+                      className="mt-2 w-full rounded-md border bg-muted px-4 py-3 text-center text-sm font-bold transition-colors hover:bg-accent"
                       onClick={() => {
                         router.push(`/search?q=${encodeURIComponent(searchQuery)}`);
                         setSearchQuery("");
@@ -136,7 +139,7 @@ export function Header() {
             rel="noopener noreferrer"
             className="hidden md:flex"
           >
-            <Button variant="outline" size="sm" className="gap-1">
+            <Button variant="outline" size="sm" className="gap-1 rounded-md font-bold">
               <Coffee className="h-4 w-4" />
               <span>Support</span>
             </Button>

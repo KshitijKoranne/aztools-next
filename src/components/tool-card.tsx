@@ -11,14 +11,14 @@ interface ToolCardProps {
 export function ToolCard({ name, description, icon: Icon, path }: ToolCardProps) {
   return (
     <Link href={path} className="block group">
-      <div className="rounded-lg border bg-card text-card-foreground p-5 h-full transition-all hover:border-primary/50 hover:shadow-md">
-        <div className="bg-primary/10 rounded-md p-2 text-primary inline-flex mb-3">
+      <div className="az-card h-full p-5 text-card-foreground">
+        <div className="relative z-10 mb-4 inline-flex rounded-md border bg-background/70 p-2 text-primary shadow-sm">
           <Icon className="h-5 w-5" />
         </div>
-        <h3 className="font-medium text-lg mb-1 group-hover:text-primary transition-colors">
+        <h3 className="relative z-10 mb-2 text-lg font-black leading-tight group-hover:text-primary transition-colors">
           {name}
         </h3>
-        <p className="text-sm text-muted-foreground">{description}</p>
+        <p className="relative z-10 text-sm leading-6 text-muted-foreground">{description}</p>
       </div>
     </Link>
   );

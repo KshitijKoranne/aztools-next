@@ -17,7 +17,7 @@ export default function PrivacyPolicyPage() {
     <MainLayout>
       <div className="container mx-auto px-4 py-8 max-w-4xl">
         <div className="mb-8">
-          <h1 className="text-4xl font-bold tracking-tight mb-4">Privacy Policy</h1>
+          <h1 className="text-4xl font-black mb-4">Privacy Policy</h1>
           <p className="text-lg text-muted-foreground">Last updated: {LAST_UPDATED}</p>
         </div>
 

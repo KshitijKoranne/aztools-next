@@ -58,10 +58,10 @@ export function ToolLayout({ toolId, children }: ToolLayoutProps) {
           ])}
         />
       )}
-      <div className="container mx-auto px-4 py-8">
-        <div className="mb-8">
+      <div className="container mx-auto px-4 py-10">
+        <div className="az-chrome mb-8 rounded-lg p-4 md:p-6">
           <div className="flex items-center mb-4">
-            <Button variant="ghost" size="icon" asChild className="mr-2">
+            <Button variant="ghost" size="icon" asChild className="mr-2 rounded-md">
               <Link
                 href={category ? `/category/${category.id}` : "/"}
                 aria-label={category ? `Back to ${category.name}` : "Back to home"}
@@ -78,8 +78,9 @@ export function ToolLayout({ toolId, children }: ToolLayoutProps) {
               </Link>
             )}
           </div>
-          <h1 className="text-3xl font-bold tracking-tight">{tool?.name}</h1>
-          <p className="mt-1 text-muted-foreground">{tool?.description}</p>
+          <div className="az-section-label mb-2">Tool</div>
+          <h1 className="text-4xl font-black leading-tight">{tool?.name}</h1>
+          <p className="mt-2 max-w-3xl text-muted-foreground">{tool?.description}</p>
         </div>
 
         <div>{children}</div>
