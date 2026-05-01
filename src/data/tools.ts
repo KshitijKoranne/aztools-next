@@ -301,6 +301,14 @@ export const tools: Tool[] = [
     path: "/tools/hash-generator"
   },
   {
+    id: "uuid-generator",
+    name: "UUID Generator and Validator",
+    description: "Generate UUID v4 identifiers in bulk and validate existing UUID or GUID values.",
+    category: "developer-tools",
+    icon: KeyRound,
+    path: "/tools/uuid-generator"
+  },
+  {
     id: "csv-viewer",
     name: "CSV Viewer",
     description: "View and analyze CSV files with sorting and filtering capabilities.",
@@ -348,6 +356,14 @@ export const tools: Tool[] = [
     category: "developer-tools",
     icon: BookOpen,
     path: "/tools/markdown-to-html"
+  },
+  {
+    id: "html-entity-converter",
+    name: "HTML Entity Encoder and Decoder",
+    description: "Encode text into HTML entities or decode entities back to readable content.",
+    category: "developer-tools",
+    icon: Code,
+    path: "/tools/html-entity-converter"
   },
   
   // Color Tools
@@ -632,6 +648,14 @@ export const tools: Tool[] = [
     category: "seo-tools",
     icon: FileText,
     path: "/tools/meta-tags-generator"
+  },
+  {
+    id: "utm-builder",
+    name: "UTM Builder",
+    description: "Build campaign URLs with UTM tracking parameters and parse existing tagged links.",
+    category: "seo-tools",
+    icon: ExternalLink,
+    path: "/tools/utm-builder"
   },
   {
     id: "robots-txt-generator",
@@ -1022,6 +1046,14 @@ export const tools: Tool[] = [
     category: "finance-tools",
     icon: Receipt,
     path: "/tools/invoice-generator"
+  },
+  {
+    id: "gst-calculator",
+    name: "GST Calculator",
+    description: "Calculate Indian GST inclusive and exclusive amounts with CGST, SGST, and IGST splits.",
+    category: "finance-tools",
+    icon: Receipt,
+    path: "/tools/gst-calculator"
   }
 ];
 
