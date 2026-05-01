@@ -620,6 +620,22 @@ export const tools: Tool[] = [
     path: "/tools/pdf-splitter"
   },
   {
+    id: "pdf-delete-pages",
+    name: "Delete PDF Pages",
+    description: "Remove selected pages from a PDF while keeping the remaining pages intact.",
+    category: "pdf-tools",
+    icon: Trash2,
+    path: "/tools/pdf-delete-pages"
+  },
+  {
+    id: "pdf-reverse-pages",
+    name: "Reverse PDF Pages",
+    description: "Reverse the page order of a PDF document locally in your browser.",
+    category: "pdf-tools",
+    icon: RefreshCw,
+    path: "/tools/pdf-reverse-pages"
+  },
+  {
     id: "pdf-to-image",
     name: "PDF to Image",
     description: "Convert PDF pages to image formats like JPG, PNG, or WEBP.",
@@ -650,6 +666,22 @@ export const tools: Tool[] = [
     category: "pdf-tools",
     icon: RefreshCw,
     path: "/tools/pdf-rotator"
+  },
+  {
+    id: "pdf-metadata",
+    name: "PDF Metadata Editor",
+    description: "View, edit, or clear common PDF metadata fields without uploading the file.",
+    category: "pdf-tools",
+    icon: FileEdit,
+    path: "/tools/pdf-metadata"
+  },
+  {
+    id: "pdf-page-numbers",
+    name: "Add Page Numbers to PDF",
+    description: "Add customizable page numbers with position, color, size, and format controls.",
+    category: "pdf-tools",
+    icon: Hash,
+    path: "/tools/pdf-page-numbers"
   },
   
   // Image Tools
