@@ -28,17 +28,17 @@ export function HomeHero() {
       <div className="absolute inset-0 -z-10 az-scanline opacity-35" />
       <div className="container mx-auto grid min-h-[620px] items-center gap-10 px-4 py-16 lg:grid-cols-[minmax(0,1fr)_minmax(360px,0.82fr)] lg:py-20">
         <div>
-          <div className="az-section-label mb-5">Browser tools, tuned fast</div>
+          <div className="az-section-label mb-5">Free online tools for everyday work</div>
           <h1 className="max-w-4xl text-5xl font-black leading-[0.92] md:text-7xl lg:text-8xl">
-            Utility work should feel
-            <span className="block text-primary">electric.</span>
+            Get more done with
+            <span className="block text-primary">one clean toolkit.</span>
           </h1>
           <div className="mt-6 min-h-10 font-mono text-base font-semibold text-muted-foreground md:text-lg">
-            <span>Open a </span>
+            <span>Open </span>
             <span className="text-foreground">
               <TypeAnimation sequence={sequence} wrapper="span" speed={48} repeat={Infinity} cursor={false} />
             </span>
-            <span> tool and finish the job.</span>
+            <span> and finish the job.</span>
           </div>
           <div className="mt-8 flex flex-wrap gap-3">
             <Button asChild size="lg" className="rounded-md font-bold">
