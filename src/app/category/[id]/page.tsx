@@ -6,6 +6,7 @@ import { Button } from "@/components/ui/button";
 import { MainLayout } from "@/components/layouts/main-layout";
 import { ToolCard } from "@/components/tool-card";
 import { categories, getCategoryById, getToolsByCategory } from "@/data/tools";
+import { jsonLd, siteName, siteUrl } from "@/lib/seo";
 
 import type { Metadata } from "next";
 
@@ -22,11 +23,11 @@ export async function generateMetadata({
 }): Promise<Metadata> {
   const { id } = await params;
   const category = getCategoryById(id);
-  if (!category) return { title: "Category Not Found - AZ Tools" };
+  if (!category) return { title: "Category Not Found" };
 
   const count = getToolsByCategory(id).length;
   return {
-    title: `${category.name} - AZ Tools`,
+    title: category.name,
     description: `${category.description} ${count} free online tools.`,
     alternates: {
       canonical: `https://aztools.in/category/${category.id}`,
@@ -49,6 +50,40 @@ export default async function CategoryPage({ params }: { params: Params }) {
 
   return (
     <MainLayout>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={jsonLd([
+          {
+            "@context": "https://schema.org",
+            "@type": "BreadcrumbList",
+            itemListElement: [
+              { "@type": "ListItem", position: 1, name: siteName, item: siteUrl },
+              {
+                "@type": "ListItem",
+                position: 2,
+                name: category.name,
+                item: `${siteUrl}/category/${category.id}`,
+              },
+            ],
+          },
+          {
+            "@context": "https://schema.org",
+            "@type": "CollectionPage",
+            name: `${category.name} - AZ Tools`,
+            description: category.description,
+            url: `${siteUrl}/category/${category.id}`,
+            mainEntity: {
+              "@type": "ItemList",
+              itemListElement: tools.map((tool, index) => ({
+                "@type": "ListItem",
+                position: index + 1,
+                name: tool.name,
+                url: `${siteUrl}${tool.path}`,
+              })),
+            },
+          },
+        ])}
+      />
       <div className="container mx-auto px-4 py-8">
         <div className="flex items-center mb-8">
           <Button variant="ghost" size="icon" asChild className="mr-4">

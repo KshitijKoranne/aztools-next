@@ -4,6 +4,7 @@ import { ArrowLeft } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { MainLayout } from "@/components/layouts/main-layout";
 import { getToolById, getCategoryById } from "@/data/tools";
+import { jsonLd, siteName, siteUrl } from "@/lib/seo";
 
 interface ToolLayoutProps {
   toolId: string;
@@ -16,6 +17,47 @@ export function ToolLayout({ toolId, children }: ToolLayoutProps) {
 
   return (
     <MainLayout>
+      {tool && (
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={jsonLd([
+            {
+              "@context": "https://schema.org",
+              "@type": "BreadcrumbList",
+              itemListElement: [
+                { "@type": "ListItem", position: 1, name: siteName, item: siteUrl },
+                ...(category
+                  ? [
+                      {
+                        "@type": "ListItem",
+                        position: 2,
+                        name: category.name,
+                        item: `${siteUrl}/category/${category.id}`,
+                      },
+                    ]
+                  : []),
+                {
+                  "@type": "ListItem",
+                  position: category ? 3 : 2,
+                  name: tool.name,
+                  item: `${siteUrl}${tool.path}`,
+                },
+              ],
+            },
+            {
+              "@context": "https://schema.org",
+              "@type": "WebApplication",
+              name: tool.name,
+              description: tool.description,
+              url: `${siteUrl}${tool.path}`,
+              applicationCategory: "UtilitiesApplication",
+              operatingSystem: "Any",
+              isAccessibleForFree: true,
+              offers: { "@type": "Offer", price: "0", priceCurrency: "USD" },
+            },
+          ])}
+        />
+      )}
       <div className="container mx-auto px-4 py-8">
         <div className="mb-8">
           <div className="flex items-center mb-4">

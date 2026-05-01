@@ -4,6 +4,7 @@ import "./globals.css";
 
 import { ThemeProvider } from "@/components/theme-provider";
 import { Toaster } from "@/components/ui/sonner";
+import { jsonLd, publisherName, siteName, siteUrl } from "@/lib/seo";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -15,16 +16,17 @@ const geistMono = Geist_Mono({
   subsets: ["latin"],
 });
 
-const siteUrl = "https://aztools.in";
-
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
+  applicationName: siteName,
+  referrer: "origin-when-cross-origin",
+  category: "technology",
   title: {
-    default: "AZ Tools - Professional Online Toolkit for Everyone",
+    default: "AZ Tools - Free Online Tools for PDF, Images, Text, Developers & SEO",
     template: "%s | AZ Tools",
   },
   description:
-    "Transform your workflow with 90+ professional-grade online tools. PDF processing, image editing, text utilities, developer tools, calculators & more. Free, fast, privacy-focused.",
+    "Use 95+ free online tools for PDF processing, image editing, text utilities, developer tools, calculators, SEO, security, finance, and productivity. Fast, browser-friendly, and privacy-focused.",
   keywords: [
     "online tools",
     "developer tools",
@@ -40,31 +42,37 @@ export const metadata: Metadata = {
     "web utilities",
     "free online tools",
   ],
-  authors: [{ name: "KSK Labs" }],
-  creator: "KSK Labs",
-  publisher: "KSK Labs",
+  authors: [{ name: publisherName }],
+  creator: publisherName,
+  publisher: publisherName,
   alternates: { canonical: siteUrl },
   openGraph: {
     type: "website",
     locale: "en_US",
     url: siteUrl,
-    siteName: "AZ Tools",
-    title: "AZ Tools - Professional Online Toolkit for Everyone",
+    siteName,
+    title: "AZ Tools - Free Online Tools for PDF, Images, Text, Developers & SEO",
     description:
-      "Transform your workflow with 90+ professional-grade online tools. Free, fast, privacy-focused.",
+      "Use 95+ free online tools for PDF processing, image editing, text utilities, developer tools, calculators, SEO, security, finance, and productivity.",
     images: [{ url: "/og-image.png", width: 1200, height: 630, alt: "AZ Tools" }],
   },
   twitter: {
     card: "summary_large_image",
-    title: "AZ Tools - Professional Online Toolkit for Everyone",
+    title: "AZ Tools - Free Online Tools for PDF, Images, Text, Developers & SEO",
     description:
-      "Transform your workflow with 90+ professional-grade online tools. Free, fast, privacy-focused.",
+      "Use 95+ free online tools for PDF, image, text, developer, calculator, SEO, security, finance, and productivity tasks.",
     images: ["/og-image.png"],
   },
   robots: {
     index: true,
     follow: true,
-    googleBot: { index: true, follow: true, "max-image-preview": "large" },
+    googleBot: {
+      index: true,
+      follow: true,
+      "max-image-preview": "large",
+      "max-snippet": -1,
+      "max-video-preview": -1,
+    },
   },
   icons: {
     icon: [
@@ -87,6 +95,26 @@ export const viewport: Viewport = {
 export default function RootLayout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
+  const structuredData = [
+    {
+      "@context": "https://schema.org",
+      "@type": "Organization",
+      name: publisherName,
+      url: siteUrl,
+      logo: `${siteUrl}/android-chrome-512x512.png`,
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "WebApplication",
+      name: siteName,
+      url: siteUrl,
+      applicationCategory: "UtilitiesApplication",
+      operatingSystem: "Any",
+      offers: { "@type": "Offer", price: "0", priceCurrency: "USD" },
+      publisher: { "@type": "Organization", name: publisherName },
+    },
+  ];
+
   return (
     <html lang="en" suppressHydrationWarning className="h-full">
       <body
@@ -98,6 +126,10 @@ export default function RootLayout({
           enableSystem
           disableTransitionOnChange
         >
+          <script
+            type="application/ld+json"
+            dangerouslySetInnerHTML={jsonLd(structuredData)}
+          />
           {children}
           <Toaster />
         </ThemeProvider>
