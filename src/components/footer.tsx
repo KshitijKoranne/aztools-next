@@ -64,7 +64,16 @@ export function Footer() {
         <div className="mt-8 pt-6 border-t text-center text-sm text-muted-foreground">
           <p className="flex items-center justify-center gap-1">
             Made in INDIA with{" "}
-            <Heart className="h-4 w-4 text-red-500 fill-red-500" /> by KSK Labs.
+            <Heart className="h-4 w-4 text-red-500 fill-red-500" /> by{" "}
+            <a
+              href="https://kjrlabs.in"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="hover:text-primary transition-colors"
+            >
+              KJR Labs
+            </a>
+            .
             © {year}
           </p>
         </div>

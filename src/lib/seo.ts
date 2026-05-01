@@ -1,6 +1,6 @@
 export const siteUrl = "https://aztools.in";
 export const siteName = "AZ Tools";
-export const publisherName = "KSK Labs";
+export const publisherName = "KJR Labs";
 
 export function jsonLd(data: unknown) {
   return {
