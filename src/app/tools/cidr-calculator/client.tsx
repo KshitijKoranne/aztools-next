@@ -26,7 +26,7 @@ function calculate(ip: string, prefixText: string) {
   const prefix = Number(prefixText);
   if (ipNumber === null || !Number.isInteger(prefix) || prefix < 0 || prefix > 32) return null;
   const mask = prefix === 0 ? 0 : (0xffffffff << (32 - prefix)) >>> 0;
-  const network = ipNumber & mask;
+  const network = (ipNumber & mask) >>> 0;
   const broadcast = (network | (~mask >>> 0)) >>> 0;
   const totalHosts = 2 ** (32 - prefix);
   const usableHosts = prefix >= 31 ? totalHosts : Math.max(0, totalHosts - 2);
@@ -36,8 +36,8 @@ function calculate(ip: string, prefixText: string) {
     broadcast: numberToIp(broadcast),
     subnetMask: numberToIp(mask),
     wildcardMask: numberToIp((~mask) >>> 0),
-    firstUsable: numberToIp(prefix >= 31 ? network : network + 1),
-    lastUsable: numberToIp(prefix >= 31 ? broadcast : broadcast - 1),
+    firstUsable: numberToIp(prefix >= 31 ? network : (network + 1) >>> 0),
+    lastUsable: numberToIp(prefix >= 31 ? broadcast : (broadcast - 1) >>> 0),
     totalHosts,
     usableHosts,
     isPrivate:

@@ -19,16 +19,21 @@ const bases = [
 ] as const;
 
 function parseValue(value: string, base: number) {
-  const cleaned = value.trim().replace(/^0b/i, "").replace(/^0x/i, "").replace(/^0o/i, "").replaceAll("_", "").replaceAll(" ", "");
+  const trimmed = value.trim();
+  const sign = trimmed.startsWith("-") ? "-" : "";
+  const unsigned = trimmed.replace(/^-/, "");
+  const cleaned = `${sign}${unsigned.replace(/^0b/i, "").replace(/^0x/i, "").replace(/^0o/i, "").replaceAll("_", "").replaceAll(" ", "")}`;
   if (!cleaned) return null;
-  const valid = base === 2 ? /^[01]+$/ : base === 8 ? /^[0-7]+$/ : base === 10 ? /^-?\d+$/ : /^[0-9a-f]+$/i;
+  const valid = base === 2 ? /^-?[01]+$/ : base === 8 ? /^-?[0-7]+$/ : base === 10 ? /^-?\d+$/ : /^-?[0-9a-f]+$/i;
   if (!valid.test(cleaned)) return null;
   const parsed = Number.parseInt(cleaned, base);
   return Number.isSafeInteger(parsed) ? parsed : null;
 }
 
 function group(value: string, size: number) {
-  return value.split("").reverse().join("").match(new RegExp(`.{1,${size}}`, "g"))?.join(" ").split("").reverse().join("") ?? value;
+  const sign = value.startsWith("-") ? "-" : "";
+  const unsigned = sign ? value.slice(1) : value;
+  return sign + (unsigned.split("").reverse().join("").match(new RegExp(`.{1,${size}}`, "g"))?.join(" ").split("").reverse().join("") ?? unsigned);
 }
 
 export default function Client() {

@@ -16,14 +16,15 @@ const sample = JSON.stringify({ user: { id: 7, name: "Asha", roles: ["admin", "e
 
 function walk(value: unknown, path: string, query: string, matches: Match[]) {
   const text = typeof value === "string" ? value : JSON.stringify(value);
-  if (path && (!query || path.toLowerCase().includes(query) || String(text).toLowerCase().includes(query))) {
-    matches.push({ path, value: String(text) });
+  const displayPath = path || "$";
+  if (!query || displayPath.toLowerCase().includes(query) || String(text).toLowerCase().includes(query)) {
+    matches.push({ path: displayPath, value: String(text) });
   }
   if (Array.isArray(value)) value.forEach((item, index) => walk(item, `${path}[${index}]`, query, matches));
   else if (value && typeof value === "object") {
     Object.entries(value as Record<string, unknown>).forEach(([key, item]) => {
       const safeKey = /^[a-zA-Z_$][\w$]*$/.test(key) ? `.${key}` : `[${JSON.stringify(key)}]`;
-      walk(item, path ? `${path}${safeKey}` : key, query, matches);
+      walk(item, path ? `${path}${safeKey}` : `$${safeKey}`, query, matches);
     });
   }
 }

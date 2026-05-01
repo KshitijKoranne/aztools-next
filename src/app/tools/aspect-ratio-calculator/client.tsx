@@ -15,6 +15,19 @@ function gcd(a: number, b: number): number {
   return b ? gcd(b, a % b) : Math.abs(a);
 }
 
+function decimalPlaces(value: number) {
+  const text = String(value);
+  return text.includes(".") ? text.split(".")[1]!.length : 0;
+}
+
+function simplifyRatio(width: number, height: number) {
+  const scale = 10 ** Math.max(decimalPlaces(width), decimalPlaces(height));
+  const scaledWidth = Math.round(width * scale);
+  const scaledHeight = Math.round(height * scale);
+  const divisor = gcd(scaledWidth, scaledHeight);
+  return { ratioW: scaledWidth / divisor, ratioH: scaledHeight / divisor };
+}
+
 export default function Client() {
   const [width, setWidth] = useState("1920");
   const [height, setHeight] = useState("1080");
@@ -24,8 +37,7 @@ export default function Client() {
   const result = useMemo(() => {
     const w = Number(width), h = Number(height), t = Number(target);
     if (![w, h, t].every((value) => Number.isFinite(value) && value > 0)) return null;
-    const divisor = gcd(w, h);
-    const ratioW = w / divisor, ratioH = h / divisor;
+    const { ratioW, ratioH } = simplifyRatio(w, h);
     const computed = known === "width" ? Math.round((t * ratioH / ratioW) * 100) / 100 : Math.round((t * ratioW / ratioH) * 100) / 100;
     return { ratio: `${ratioW}:${ratioH}`, css: `${ratioW} / ${ratioH}`, computed };
   }, [height, known, target, width]);

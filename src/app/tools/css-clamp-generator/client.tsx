@@ -22,7 +22,7 @@ export default function Client() {
 
   const result = useMemo(() => {
     const min = Number(minSize), max = Number(maxSize), minVw = Number(minViewport), maxVw = Number(maxViewport);
-    if (![min, max, minVw, maxVw].every(Number.isFinite) || minVw >= maxVw) return null;
+    if (![min, max, minVw, maxVw].every(Number.isFinite) || min <= 0 || max <= 0 || minVw <= 0 || maxVw <= 0 || minVw >= maxVw || min > max) return null;
     const slope = (max - min) / (maxVw - minVw);
     const intercept = min - slope * minVw;
     return `clamp(${round(min / 16)}rem, ${round(intercept / 16)}rem + ${round(slope * 100)}vw, ${round(max / 16)}rem)`;
