@@ -267,6 +267,14 @@ export const tools: Tool[] = [
     path: "/tools/regex-tester"
   },
   {
+    id: "http-status-lookup",
+    name: "HTTP Status Code Lookup",
+    description: "Search HTTP response codes by number, category, and meaning.",
+    category: "developer-tools",
+    icon: Code,
+    path: "/tools/http-status-lookup"
+  },
+  {
     id: "jwt-decoder",
     name: "JWT Decoder",
     description: "Decode and verify JSON Web Tokens (JWT).",
@@ -346,6 +354,14 @@ export const tools: Tool[] = [
     category: "developer-tools",
     icon: BookOpen,
     path: "/tools/markdown-to-html"
+  },
+  {
+    id: "mime-type-lookup",
+    name: "MIME Type Lookup",
+    description: "Find common MIME types by file extension or content type.",
+    category: "developer-tools",
+    icon: FileText,
+    path: "/tools/mime-type-lookup"
   },
   {
     id: "html-entity-converter",
@@ -504,6 +520,22 @@ export const tools: Tool[] = [
     category: "it-tools",
     icon: Server,
     path: "/tools/dns-lookup"
+  },
+  {
+    id: "cidr-calculator",
+    name: "CIDR Calculator",
+    description: "Calculate IPv4 subnet ranges, masks, broadcast addresses, and host counts.",
+    category: "it-tools",
+    icon: Server,
+    path: "/tools/cidr-calculator"
+  },
+  {
+    id: "chmod-calculator",
+    name: "CHMOD Calculator",
+    description: "Convert Unix permissions between checkbox, octal, and symbolic formats.",
+    category: "it-tools",
+    icon: Terminal,
+    path: "/tools/chmod-calculator"
   },
   {
     id: "cron-generator",
