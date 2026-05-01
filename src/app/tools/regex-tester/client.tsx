@@ -1,5 +1,5 @@
 "use client";
-import { useState, useEffect } from "react";
+import { useMemo, useState } from "react";
 import { ToolLayout } from "@/components/layouts/tool-layout";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -16,30 +16,32 @@ export default function Client() {
   const [pattern, setPattern] = useState("");
   const [testString, setTestString] = useState("");
   const [flags, setFlags] = useState({ global: true, caseInsensitive: false, multiline: false, unicode: false, sticky: false });
-  const [matches, setMatches] = useState<Match[]>([]);
-  const [error, setError] = useState<string | null>(null);
 
   const flagStr = [
     flags.global && "g", flags.caseInsensitive && "i", flags.multiline && "m",
     flags.unicode && "u", flags.sticky && "y",
   ].filter(Boolean).join("");
 
-  const test = () => {
-    if (!pattern || !testString) { setMatches([]); setError(null); return; }
+  const { matches, error } = useMemo(() => {
+    if (!pattern || !testString) return { matches: [] as Match[], error: null as string | null };
     try {
       const re = new RegExp(pattern, flagStr);
       const results: Match[] = [];
       if (flags.global) {
-        let m; while ((m = re.exec(testString)) !== null) results.push({ match: m[0], index: m.index, groups: m.slice(1) });
+        let m;
+        while ((m = re.exec(testString)) !== null) {
+          results.push({ match: m[0], index: m.index, groups: m.slice(1) });
+          if (m[0] === "") re.lastIndex += 1;
+        }
       } else {
         const m = re.exec(testString);
         if (m) results.push({ match: m[0], index: m.index, groups: m.slice(1) });
       }
-      setMatches(results); setError(null);
-    } catch (e) { setError((e as Error).message); setMatches([]); }
-  };
-
-  useEffect(() => { test(); }, [pattern, testString, flags]);
+      return { matches: results, error: null };
+    } catch (e) {
+      return { matches: [] as Match[], error: (e as Error).message };
+    }
+  }, [flagStr, flags.global, pattern, testString]);
 
   const FLAG_LABELS: [keyof typeof flags, string][] = [
     ["global","Global (g)"],["caseInsensitive","Case Insensitive (i)"],["multiline","Multiline (m)"],
@@ -80,7 +82,7 @@ export default function Client() {
             </div>
 
             <div className="flex justify-end">
-              <Button variant="outline" onClick={() => { setPattern(""); setTestString(""); setMatches([]); setError(null); }}>
+              <Button variant="outline" onClick={() => { setPattern(""); setTestString(""); }}>
                 <Trash className="h-4 w-4 mr-2" /> Clear
               </Button>
             </div>

@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useRef, useEffect } from "react";
+import { useMemo, useRef, useState } from "react";
 import { ToolLayout } from "@/components/layouts/tool-layout";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
@@ -98,12 +98,8 @@ const SAMPLE = `The quick brown fox jumps over the lazy dog. This is a sample te
 
 export default function TextStatisticsClient() {
   const [inputText, setInputText] = useState("");
-  const [stats, setStats] = useState<TextStats | null>(null);
+  const stats = useMemo(() => inputText.trim() ? calcStats(inputText) : null, [inputText]);
   const fileInputRef = useRef<HTMLInputElement>(null);
-
-  useEffect(() => {
-    setStats(inputText.trim() ? calcStats(inputText) : null);
-  }, [inputText]);
 
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];

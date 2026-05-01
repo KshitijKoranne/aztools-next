@@ -1,5 +1,5 @@
 "use client";
-import { useState, useCallback } from "react";
+import { useState } from "react";
 import { ToolLayout } from "@/components/layouts/tool-layout";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
@@ -47,7 +47,7 @@ function convert(json: string, opts: Options): string {
       decl = `export type ${opts.interfaceName} = ${getType(parsed[0], opts.useUnknown)}[];`;
     }
   } else {
-    let entries = Object.entries(parsed);
+    const entries = Object.entries(parsed);
     if (opts.sortKeys) entries.sort(([a], [b]) => a.localeCompare(b));
     const opt = opts.makeOptional ? "?" : "";
     const props = entries.map(([k, v]) => `  ${/^[a-zA-Z_$][a-zA-Z0-9_$]*$/.test(k) ? k : `"${k}"`}${opt}: ${getType(v, opts.useUnknown)};`);

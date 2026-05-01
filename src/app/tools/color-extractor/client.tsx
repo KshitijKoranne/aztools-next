@@ -93,6 +93,7 @@ export default function ColorExtractorClient() {
               </div>
             ) : (
               <div className="relative rounded-lg overflow-hidden bg-muted/30 flex items-center justify-center min-h-[200px]">
+                {/* eslint-disable-next-line @next/next/no-img-element -- Data URLs from user uploads cannot be optimized by next/image. */}
                 <img src={imageUrl} alt="Uploaded" className="max-w-full max-h-[400px] object-contain"/>
                 <Button variant="destructive" size="icon" className="absolute top-2 right-2 rounded-full" onClick={()=>{setImageUrl(null);setColors([]);if(fileRef.current)fileRef.current.value="";}}>
                   <Trash className="h-4 w-4"/>

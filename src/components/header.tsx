@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect, useRef } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
@@ -15,11 +15,21 @@ import { MobileNav } from "@/components/mobile-nav";
 export function Header() {
   const [isScrolled, setIsScrolled] = useState(false);
   const [searchQuery, setSearchQuery] = useState("");
-  const [searchResults, setSearchResults] = useState<typeof tools>([]);
-  const [totalResults, setTotalResults] = useState(0);
-  const [isSearching, setIsSearching] = useState(false);
   const searchRef = useRef<HTMLDivElement | null>(null);
   const router = useRouter();
+  const matchingTools = useMemo(() => {
+    const q = searchQuery.trim().toLowerCase();
+    if (!q) return [];
+    return tools.filter(
+      (tool) =>
+        tool.name.toLowerCase().includes(q) ||
+        tool.description.toLowerCase().includes(q) ||
+        tool.category.toLowerCase().includes(q)
+    );
+  }, [searchQuery]);
+  const searchResults = matchingTools.slice(0, 10);
+  const totalResults = matchingTools.length;
+  const isSearching = Boolean(searchQuery.trim());
 
   useEffect(() => {
     const handleScroll = () => setIsScrolled(window.scrollY > 10);
@@ -28,29 +38,9 @@ export function Header() {
   }, []);
 
   useEffect(() => {
-    if (searchQuery.trim()) {
-      const q = searchQuery.toLowerCase();
-      const results = tools.filter(
-        (tool) =>
-          tool.name.toLowerCase().includes(q) ||
-          tool.description.toLowerCase().includes(q) ||
-          tool.category.toLowerCase().includes(q)
-      );
-      setTotalResults(results.length);
-      setSearchResults(results.slice(0, 10));
-      setIsSearching(true);
-    } else {
-      setSearchResults([]);
-      setTotalResults(0);
-      setIsSearching(false);
-    }
-  }, [searchQuery]);
-
-  useEffect(() => {
     function handleClickOutside(event: MouseEvent) {
       if (searchRef.current && !searchRef.current.contains(event.target as Node)) {
         setSearchQuery("");
-        setIsSearching(false);
       }
     }
     document.addEventListener("mousedown", handleClickOutside);
@@ -59,7 +49,6 @@ export function Header() {
 
   const handleSearchItemClick = (path: string) => {
     setSearchQuery("");
-    setIsSearching(false);
     router.push(path);
   };
 
@@ -68,7 +57,6 @@ export function Header() {
     if (searchQuery.trim()) {
       router.push(`/search?q=${encodeURIComponent(searchQuery)}`);
       setSearchQuery("");
-      setIsSearching(false);
     }
   };
 
@@ -132,7 +120,6 @@ export function Header() {
                       onClick={() => {
                         router.push(`/search?q=${encodeURIComponent(searchQuery)}`);
                         setSearchQuery("");
-                        setIsSearching(false);
                       }}
                     >
                       View all {totalResults} results →

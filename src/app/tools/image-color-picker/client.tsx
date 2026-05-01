@@ -62,6 +62,7 @@ export default function ImageColorPickerClient() {
               </div>
             ) : (
               <>
+                {/* eslint-disable-next-line @next/next/no-img-element -- Data URLs from user uploads are drawn to canvas and cannot be optimized by next/image. */}
                 <img ref={imgRef} src={imageUrl} alt="Uploaded" className="hidden"/>
                 <canvas ref={canvasRef}
                   className="max-w-full max-h-[500px] cursor-crosshair"

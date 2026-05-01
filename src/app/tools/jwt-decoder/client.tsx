@@ -1,5 +1,5 @@
 "use client";
-import { useState, useEffect } from "react";
+import { useMemo, useState } from "react";
 import { ToolLayout } from "@/components/layouts/tool-layout";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -24,12 +24,7 @@ function decodeJWT(token: string): Decoded | null {
 
 export default function Client() {
   const [input, setInput] = useState("");
-  const [decoded, setDecoded] = useState<Decoded | null>(null);
-
-  useEffect(() => {
-    if (input.trim()) setDecoded(decodeJWT(input.trim()));
-    else setDecoded(null);
-  }, [input]);
+  const decoded = useMemo(() => input.trim() ? decodeJWT(input.trim()) : null, [input]);
 
   const copy = (text: string) => { navigator.clipboard.writeText(text); toast.success("Copied"); };
 
@@ -42,7 +37,7 @@ export default function Client() {
             <Label>JWT Token</Label>
             <div className="flex flex-col sm:flex-row gap-2">
               <Input value={input} onChange={(e) => setInput(e.target.value)} placeholder="Paste JWT token..." className="font-mono flex-1" />
-              <Button variant="outline" onClick={() => { setInput(""); setDecoded(null); }}>
+              <Button variant="outline" onClick={() => setInput("")}>
                 <Trash className="h-4 w-4 mr-2" /> Clear
               </Button>
             </div>

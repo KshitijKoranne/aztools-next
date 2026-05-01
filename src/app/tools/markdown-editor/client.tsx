@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useMemo, useState } from "react";
 import { ToolLayout } from "@/components/layouts/tool-layout";
 import { Textarea } from "@/components/ui/textarea";
 import { Button } from "@/components/ui/button";
@@ -43,17 +43,7 @@ function download(content: string, filename: string, type: string) {
 
 export default function MarkdownEditorClient() {
   const [markdown, setMarkdown] = useState(INITIAL_MARKDOWN);
-  const [htmlOutput, setHtmlOutput] = useState("");
-
-  useEffect(() => {
-    const result = marked.parse(markdown);
-    // marked.parse returns string | Promise<string> depending on version
-    if (typeof result === "string") {
-      setHtmlOutput(result);
-    } else {
-      result.then(setHtmlOutput);
-    }
-  }, [markdown]);
+  const htmlOutput = useMemo(() => marked.parse(markdown, { async: false }) as string, [markdown]);
 
   return (
     <ToolLayout toolId="markdown-editor">

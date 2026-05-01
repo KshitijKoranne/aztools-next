@@ -36,7 +36,7 @@ export default function DuplicateLineRemoverClient() {
     const originalCount = lines.length;
     let emptyRemoved = 0;
 
-    let toProcess = lines.filter((line) => {
+    const toProcess = lines.filter((line) => {
       if (line.trim() === "") {
         if (preserveEmpty) return true;
         emptyRemoved++;

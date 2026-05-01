@@ -1,28 +1,20 @@
 "use client";
-import { useState, useRef, useEffect } from "react";
+import { useMemo, useRef, useState } from "react";
 import { ToolLayout } from "@/components/layouts/tool-layout";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
 import { Switch } from "@/components/ui/switch";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { Upload, Download, Copy, RotateCcw, FileText, Eye } from "lucide-react";
+import { Upload, Download, Copy, RotateCcw, Eye } from "lucide-react";
 import { toast } from "sonner";
 import { marked } from "marked";
 
 export default function Client() {
   const [input, setInput] = useState("");
-  const [output, setOutput] = useState("");
   const [preview, setPreview] = useState(true);
   const fileRef = useRef<HTMLInputElement>(null);
-
-  useEffect(() => {
-    if (!input.trim()) { setOutput(""); return; }
-    const r = marked.parse(input);
-    if (typeof r === "string") setOutput(r);
-    else r.then(setOutput);
-  }, [input]);
+  const output = useMemo(() => input.trim() ? marked.parse(input, { async: false }) as string : "", [input]);
 
   const handleFile = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];

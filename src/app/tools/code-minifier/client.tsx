@@ -39,7 +39,7 @@ export default function Client() {
       setMinified(result);
       const savings = ((1 - result.length / code.length) * 100).toFixed(1);
       toast.success(`Size reduced by ${savings}%`);
-    } catch (e) {
+    } catch {
       toast.error("Failed to minify code");
     }
   };
