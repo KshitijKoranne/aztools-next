@@ -243,6 +243,14 @@ export const tools: Tool[] = [
     path: "/tools/json-formatter"
   },
   {
+    id: "json-schema-generator",
+    name: "JSON Schema Generator",
+    description: "Generate clean JSON Schema from JSON samples with required fields and format detection.",
+    category: "developer-tools",
+    icon: Braces,
+    path: "/tools/json-schema-generator"
+  },
+  {
     id: "json-path-finder",
     name: "JSON Path Finder",
     description: "Search JSON and copy exact object paths for matching keys and values.",
@@ -708,6 +716,14 @@ export const tools: Tool[] = [
     category: "image-tools",
     icon: ImageIcon,
     path: "/tools/image-converter"
+  },
+  {
+    id: "exif-metadata-viewer",
+    name: "EXIF Metadata Viewer",
+    description: "Inspect photo EXIF, GPS, camera, lens, and file metadata privately in your browser.",
+    category: "image-tools",
+    icon: ImageIcon,
+    path: "/tools/exif-metadata-viewer"
   },
   {
     id: "image-flipper",
