@@ -5,7 +5,7 @@ import { Coffee, Heart } from "lucide-react";
 export function Footer() {
   const year = new Date().getFullYear();
   return (
-    <footer className="mt-auto border-t bg-foreground text-background">
+    <footer className="mt-auto border-t border-white/10 bg-black text-white">
       <div className="container mx-auto px-4 py-8 md:py-12">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
           <div>
@@ -22,8 +22,8 @@ export function Footer() {
                 <span>Tools</span>
               </span>
             </Link>
-            <p className="mt-2 max-w-md text-sm text-background/70">
-              A collection of useful utilities for developers and everyday users.
+            <p className="mt-2 max-w-md text-sm text-white/56">
+              Fast browser tools for PDFs, images, code, text, security, finance, and everyday work.
             </p>
           </div>
 
@@ -61,7 +61,7 @@ export function Footer() {
           </div>
         </div>
 
-        <div className="mt-8 border-t border-background/15 pt-6 text-center text-sm text-background/70">
+        <div className="mt-8 border-t border-white/10 pt-6 text-center text-sm text-white/56">
           <p className="flex items-center justify-center gap-1">
             Made in INDIA with{" "}
             <Heart className="h-4 w-4 text-red-500 fill-red-500" /> by{" "}

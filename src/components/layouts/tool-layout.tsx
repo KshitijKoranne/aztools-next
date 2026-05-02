@@ -58,10 +58,11 @@ export function ToolLayout({ toolId, children }: ToolLayoutProps) {
           ])}
         />
       )}
+      <div className="min-h-[70vh] bg-[#050505] text-white">
       <div className="container mx-auto px-4 py-10">
-        <div className="az-chrome mb-8 rounded-lg p-4 md:p-6">
+        <div className="mb-8 rounded-lg border border-white/10 bg-[linear-gradient(135deg,#203727,#121212_54%,#080808)] p-4 shadow-[0_24px_90px_-58px_rgba(0,0,0,1)] md:p-6">
           <div className="flex items-center mb-4">
-            <Button variant="ghost" size="icon" asChild className="mr-2 rounded-md">
+            <Button variant="ghost" size="icon" asChild className="mr-2 rounded-full text-white hover:bg-white/10 hover:text-white">
               <Link
                 href={category ? `/category/${category.id}` : "/"}
                 aria-label={category ? `Back to ${category.name}` : "Back to home"}
@@ -72,18 +73,19 @@ export function ToolLayout({ toolId, children }: ToolLayoutProps) {
             {category && (
               <Link
                 href={`/category/${category.id}`}
-                className="text-sm text-muted-foreground hover:text-primary transition-colors"
+                className="text-sm font-semibold text-white/58 transition-colors hover:text-primary"
               >
                 {category.name}
               </Link>
             )}
           </div>
           <div className="az-section-label mb-2">Tool</div>
-          <h1 className="text-4xl font-black leading-tight">{tool?.name}</h1>
-          <p className="mt-2 max-w-3xl text-muted-foreground">{tool?.description}</p>
+          <h1 className="text-4xl font-black leading-tight md:text-5xl">{tool?.name}</h1>
+          <p className="mt-2 max-w-3xl text-white/62">{tool?.description}</p>
         </div>
 
         <div>{children}</div>
+      </div>
       </div>
     </MainLayout>
   );

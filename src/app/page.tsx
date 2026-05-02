@@ -26,12 +26,14 @@ export default function Home() {
       />
       <HomeHero />
 
-      <section className="py-14">
+      <section className="bg-[#050505] py-14 text-white">
         <div className="container mx-auto px-4">
-          <div className="mb-8">
-            <div className="az-section-label mb-3">Tool map</div>
-            <h2 className="text-4xl font-black leading-tight md:text-5xl">Pick a lane. Ship the task.</h2>
-            <p className="mt-3 max-w-2xl text-muted-foreground">Organized utilities for PDFs, images, text, code, SEO, security, finance, and daily operations.</p>
+          <div className="mb-8 flex flex-col gap-3 md:flex-row md:items-end md:justify-between">
+            <div>
+              <div className="az-section-label mb-3">Tool playlists</div>
+              <h2 className="text-4xl font-black leading-tight md:text-5xl">Pick a category. Press play.</h2>
+            </div>
+            <p className="max-w-xl text-sm leading-6 text-white/58">PDFs, images, text, code, SEO, security, finance, and daily operations grouped for quick action.</p>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
             {categories.map((category) => (
@@ -48,12 +50,14 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="border-t py-14">
+      <section className="border-t border-white/10 bg-[#050505] py-14 text-white">
         <div className="container mx-auto px-4">
-          <div className="mb-8">
-            <div className="az-section-label mb-3">Fast openers</div>
-            <h2 className="text-3xl font-black leading-tight md:text-4xl">Start where the work usually starts.</h2>
-            <p className="mt-3 max-w-2xl text-muted-foreground">A quick wall of high-use tools, kept browser-friendly and direct.</p>
+          <div className="mb-8 flex flex-col gap-3 md:flex-row md:items-end md:justify-between">
+            <div>
+              <div className="az-section-label mb-3">Recently useful</div>
+              <h2 className="text-3xl font-black leading-tight md:text-4xl">Start where the work usually starts.</h2>
+            </div>
+            <p className="max-w-xl text-sm leading-6 text-white/58">A quick wall of high-use tools, kept browser-friendly and direct.</p>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
             {featuredTools.map((tool) => (

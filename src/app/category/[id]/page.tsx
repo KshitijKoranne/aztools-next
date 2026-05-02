@@ -84,17 +84,20 @@ export default async function CategoryPage({ params }: { params: Params }) {
           },
         ])}
       />
-      <div className="container mx-auto px-4 py-10">
-        <div className="az-chrome mb-8 flex items-center rounded-lg p-4 md:p-6">
-          <Button variant="ghost" size="icon" asChild className="mr-4 rounded-md">
+      <div className="min-h-[70vh] bg-[#050505] text-white">
+        <div className="container mx-auto px-4 py-10">
+        <div className="mb-8 rounded-lg border border-white/10 bg-[linear-gradient(135deg,#253f2e,#121212_58%,#0a0a0a)] p-4 md:p-8">
+          <div className="flex items-center">
+          <Button variant="ghost" size="icon" asChild className="mr-4 rounded-full text-white hover:bg-white/10 hover:text-white">
             <Link href="/" aria-label="Back to home">
               <ArrowLeft className="h-5 w-5" />
             </Link>
           </Button>
           <div>
             <div className="az-section-label mb-2">Category</div>
-            <h1 className="text-4xl font-black leading-tight">{category.name}</h1>
-            <p className="mt-1 text-muted-foreground">{category.description}</p>
+            <h1 className="text-4xl font-black leading-tight md:text-6xl">{category.name}</h1>
+            <p className="mt-2 max-w-2xl text-white/62">{category.description}</p>
+          </div>
           </div>
         </div>
 
@@ -113,6 +116,7 @@ export default async function CategoryPage({ params }: { params: Params }) {
             ))}
           </div>
         )}
+        </div>
       </div>
     </MainLayout>
   );

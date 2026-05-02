@@ -62,13 +62,13 @@ export function Header() {
 
   return (
     <header
-      className={`sticky top-0 z-50 w-full border-b bg-background/74 backdrop-blur-xl transition-shadow duration-200 ${
-        isScrolled ? "shadow-[0_18px_70px_-54px_rgba(15,23,42,0.9)]" : ""
+      className={`sticky top-0 z-50 w-full border-b border-white/10 bg-black/78 backdrop-blur-xl transition-shadow duration-200 ${
+        isScrolled ? "shadow-[0_18px_70px_-54px_rgba(0,0,0,1)]" : ""
       }`}
     >
       <div className="container mx-auto flex h-16 items-center justify-between px-4">
-        <Link href="/" className="group flex items-center gap-2 text-xl font-black">
-          <span className="relative flex h-9 w-9 items-center justify-center overflow-hidden rounded-md border bg-foreground text-background shadow-sm">
+        <Link href="/" className="group flex items-center gap-2 text-xl font-black text-white">
+          <span className="relative flex h-9 w-9 items-center justify-center overflow-hidden rounded-full bg-primary text-primary-foreground shadow-[0_16px_42px_-20px_var(--az-green)]">
             <Image
               src="/favicon-32x32.png"
               alt="AZ Tools Logo"
@@ -90,7 +90,7 @@ export function Header() {
               <input
                 type="search"
                 placeholder="Search tools..."
-                className="h-10 w-full rounded-md border border-input bg-background/70 px-9 py-2 font-mono text-sm shadow-inner placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring md:w-[240px] lg:w-[360px]"
+                className="h-10 w-full rounded-full border border-white/10 bg-white/[0.08] px-9 py-2 text-sm font-semibold text-white shadow-inner placeholder:text-white/42 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring md:w-[240px] lg:w-[360px]"
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
               />
@@ -98,7 +98,7 @@ export function Header() {
               <button
                 type="submit"
                 aria-label="Search"
-                className="absolute right-2 top-1/2 -translate-y-1/2 rounded border bg-muted px-1.5 py-0.5 font-mono text-[10px] font-bold text-muted-foreground"
+                className="absolute right-2 top-1/2 -translate-y-1/2 rounded-full bg-primary px-2 py-0.5 text-[10px] font-black text-primary-foreground"
               >
                 GO
               </button>
@@ -109,7 +109,7 @@ export function Header() {
                     <button
                       key={tool.id}
                       type="button"
-                      className="group w-full rounded-md px-3 py-2 text-left transition-colors hover:bg-accent"
+                      className="group w-full rounded-md px-3 py-2 text-left transition-colors hover:bg-white/10"
                       onClick={() => handleSearchItemClick(tool.path)}
                     >
                       <div className="font-bold group-hover:text-primary">{tool.name}</div>
@@ -119,7 +119,7 @@ export function Header() {
                   {totalResults > 10 && (
                     <button
                       type="button"
-                      className="mt-2 w-full rounded-md border bg-muted px-4 py-3 text-center text-sm font-bold transition-colors hover:bg-accent"
+                      className="mt-2 w-full rounded-full bg-primary px-4 py-3 text-center text-sm font-black text-primary-foreground transition-colors hover:bg-primary/90"
                       onClick={() => {
                         router.push(`/search?q=${encodeURIComponent(searchQuery)}`);
                         setSearchQuery("");
@@ -139,7 +139,7 @@ export function Header() {
             rel="noopener noreferrer"
             className="hidden md:flex"
           >
-            <Button variant="outline" size="sm" className="gap-1 rounded-md font-bold">
+            <Button variant="outline" size="sm" className="gap-1 rounded-full border-white/10 bg-white/[0.06] font-bold text-white hover:bg-white/12 hover:text-white">
               <Coffee className="h-4 w-4" />
               <span>Support</span>
             </Button>
