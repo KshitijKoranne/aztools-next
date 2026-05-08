@@ -12,7 +12,7 @@ export function ToolCard({ name, description, icon: Icon, path }: ToolCardProps)
   return (
     <Link href={path} className="block group">
       <div className="az-card grid h-full grid-cols-[auto_1fr_auto] items-start gap-4 p-4 text-card-foreground">
-        <div className="relative z-10 flex h-12 w-12 items-center justify-center rounded-md bg-white/8 text-primary">
+        <div className="relative z-10 flex h-12 w-12 items-center justify-center rounded-2xl bg-primary/12 text-primary">
           <Icon className="h-5 w-5" />
         </div>
         <div>

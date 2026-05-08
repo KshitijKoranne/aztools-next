@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { ArrowRight } from "lucide-react";
+import { ArrowRight, BadgeCheck, Cloud, FileText, ImageIcon, TerminalSquare, WandSparkles } from "lucide-react";
 
 import { CategoryCard } from "@/components/category-card";
 import { HomeHero } from "@/components/home-hero";
@@ -9,26 +9,60 @@ import { jsonLd, siteUrl } from "@/lib/seo";
 
 function getFeaturedTools(): Tool[] {
   const featuredIds = [
-    "json-formatter",
-    "image-compressor",
-    "text-statistics",
     "pdf-merger",
+    "image-compressor",
+    "json-formatter",
+    "weather-forecast",
+    "country-info-lookup",
+    "password-generator",
     "qr-code-generator",
     "unit-converter",
   ];
 
-  const picked = featuredIds.flatMap((id) => {
+  return featuredIds.flatMap((id) => {
     const tool = tools.find((item) => item.id === id);
     return tool ? [tool] : [];
   });
-
-  const fillers = tools.filter((tool) => !featuredIds.includes(tool.id));
-  return [...picked, ...fillers].slice(0, 6);
 }
+
+const bentoBlocks = [
+  {
+    title: "File work without friction",
+    description: "Merge PDFs, compress images, extract text, inspect metadata, and keep files moving.",
+    href: "/category/pdf-tools",
+    icon: FileText,
+    className: "lg:col-span-2",
+    glow: "from-[var(--az-mint)]/24",
+  },
+  {
+    title: "Developer utilities",
+    description: "Format JSON, test regex, inspect repos, build schemas, and clean up code.",
+    href: "/category/developer-tools",
+    icon: TerminalSquare,
+    className: "",
+    glow: "from-[var(--az-cyan)]/22",
+  },
+  {
+    title: "Image studio",
+    description: "Resize, crop, convert, compress, pick colors, and read EXIF data.",
+    href: "/category/image-tools",
+    icon: ImageIcon,
+    className: "",
+    glow: "from-[var(--az-rose)]/20",
+  },
+  {
+    title: "Live data lookups",
+    description: "Weather, holidays, country info, GitHub repo stats, SSL, DNS, IP, and more.",
+    href: "/category/live-data-tools",
+    icon: Cloud,
+    className: "lg:col-span-2",
+    glow: "from-[var(--az-violet)]/22",
+  },
+];
 
 export default function Home() {
   const featuredTools = getFeaturedTools();
-  const moreTools = tools.slice(0, 25);
+  const moreTools = tools.slice(0, 30);
 
   return (
     <MainLayout>
@@ -49,14 +83,26 @@ export default function Home() {
 
       <HomeHero />
 
-      <section id="featured-tools" className="bg-[#131313] px-6 py-12 text-[#e5e2e1] md:py-20">
-        <div className="mx-auto max-w-[1200px]">
-          <h2 className="mb-12 text-[32px] font-semibold leading-tight tracking-[-0.02em] text-[#e5e2e1]">
-            Featured Tools
-          </h2>
+      <section id="featured-tools" className="relative overflow-hidden bg-background px-4 py-16 md:py-24">
+        <div className="absolute inset-0 az-grid opacity-25" />
+        <div className="container relative mx-auto">
+          <div className="mb-10 flex flex-col gap-4 md:flex-row md:items-end md:justify-between">
+            <div>
+              <div className="az-section-label mb-3">Quick launch</div>
+              <h2 className="max-w-3xl text-4xl font-black tracking-[-0.055em] md:text-6xl">
+                Tools that feel one click away.
+              </h2>
+            </div>
+            <Link
+              href="/search"
+              className="inline-flex w-fit items-center gap-2 rounded-full border bg-card/70 px-5 py-3 text-sm font-black text-foreground shadow-sm backdrop-blur transition-colors hover:bg-primary hover:text-primary-foreground"
+            >
+              Open directory <ArrowRight className="h-4 w-4" />
+            </Link>
+          </div>
 
-          <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
-            {featuredTools.map((tool) => {
+          <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
+            {featuredTools.map((tool, index) => {
               const Icon = tool.icon;
               const category = categories.find((item) => item.id === tool.category);
 
@@ -64,22 +110,21 @@ export default function Home() {
                 <Link
                   key={tool.id}
                   href={tool.path}
-                  className="group relative flex min-h-[230px] cursor-pointer flex-col gap-4 overflow-hidden rounded-3xl border border-[#414755]/25 bg-[#201f1f]/70 p-6 shadow-sm backdrop-blur-xl transition-all duration-300 hover:scale-[1.02] hover:border-[#adc6ff]/30 hover:shadow-md"
+                  className={`group az-card min-h-[230px] p-5 ${index === 0 || index === 3 ? "lg:col-span-2" : ""}`}
                 >
-                  <div className="absolute inset-0 bg-gradient-to-br from-[#adc6ff]/5 to-transparent opacity-0 transition-opacity group-hover:opacity-100" />
-                  <div className="relative z-10 flex items-start justify-between">
-                    <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-[#2a2a2a] text-[#adc6ff] transition-colors group-hover:bg-[#adc6ff] group-hover:text-[#002e69]">
-                      <Icon className="h-6 w-6" />
+                  <div className="relative z-10 flex h-full flex-col">
+                    <div className="flex items-start justify-between gap-4">
+                      <div className="flex h-14 w-14 items-center justify-center rounded-2xl bg-primary text-primary-foreground shadow-[0_24px_80px_-45px_color-mix(in_oklch,var(--primary)_80%,#000)]">
+                        <Icon className="h-6 w-6" />
+                      </div>
+                      <span className="rounded-full border bg-background/55 px-3 py-1 text-[11px] font-black uppercase tracking-[0.12em] text-muted-foreground">
+                        {category?.name ?? "Tool"}
+                      </span>
                     </div>
-                    <span className="rounded-lg bg-[#353534] px-2 py-1 text-[12px] font-semibold uppercase tracking-[0.05em] text-[#c1c6d7]">
-                      {category?.name ?? "Tool"}
-                    </span>
-                  </div>
-                  <div className="relative z-10 mt-auto">
-                    <h3 className="mb-1 text-2xl font-semibold leading-snug tracking-[-0.01em] text-[#e5e2e1]">
-                      {tool.name}
-                    </h3>
-                    <p className="text-sm leading-6 text-[#c1c6d7]">{tool.description}</p>
+                    <div className="mt-auto">
+                      <h3 className="text-2xl font-black tracking-[-0.04em] transition-colors group-hover:text-primary">{tool.name}</h3>
+                      <p className="mt-2 line-clamp-2 text-sm leading-6 text-muted-foreground">{tool.description}</p>
+                    </div>
                   </div>
                 </Link>
               );
@@ -88,26 +133,59 @@ export default function Home() {
         </div>
       </section>
 
-      <section id="categories" className="bg-[#131313] px-6 py-12 text-[#e5e2e1] md:py-20">
-        <div className="mx-auto max-w-[1200px]">
-          <div className="mb-12 flex flex-col gap-4 md:flex-row md:items-end md:justify-between">
+      <section className="relative bg-background px-4 py-16 md:py-24">
+        <div className="container mx-auto">
+          <div className="grid gap-4 lg:grid-cols-3">
+            {bentoBlocks.map(({ title, description, href, icon: Icon, className, glow }) => (
+              <Link key={title} href={href} className={`group relative min-h-[270px] overflow-hidden rounded-[2rem] border bg-card p-7 shadow-[0_30px_120px_-82px_rgba(0,0,0,0.9)] ${className}`}>
+                <div className={`absolute inset-0 bg-gradient-to-br ${glow} via-transparent to-transparent opacity-70 transition-opacity group-hover:opacity-100`} />
+                <div className="absolute -right-12 -top-12 h-40 w-40 rounded-full border border-foreground/10" />
+                <div className="absolute -right-4 top-10 h-24 w-24 rounded-full border border-foreground/10" />
+                <div className="relative z-10 flex h-full flex-col">
+                  <div className="flex h-14 w-14 items-center justify-center rounded-2xl border bg-background/60 text-primary">
+                    <Icon className="h-6 w-6" />
+                  </div>
+                  <div className="mt-auto">
+                    <h3 className="max-w-md text-3xl font-black tracking-[-0.05em]">{title}</h3>
+                    <p className="mt-3 max-w-lg text-sm leading-6 text-muted-foreground">{description}</p>
+                    <span className="mt-5 inline-flex items-center gap-2 text-sm font-black text-primary">
+                      Browse block <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
+                    </span>
+                  </div>
+                </div>
+              </Link>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section id="categories" className="bg-background px-4 py-16 md:py-24">
+        <div className="container mx-auto">
+          <div className="mb-10 flex flex-col gap-4 md:flex-row md:items-end md:justify-between">
             <div>
-              <h2 className="text-[32px] font-semibold leading-tight tracking-[-0.02em] text-[#e5e2e1]">
-                Browse by Category
+              <div className="az-section-label mb-3">The map</div>
+              <h2 className="max-w-3xl text-4xl font-black tracking-[-0.055em] md:text-6xl">
+                A whole workshop, organized.
               </h2>
-              <p className="mt-2 max-w-2xl text-base leading-7 text-[#c1c6d7]">
-                Tools grouped with care so you can reach the right utility quickly.
+              <p className="mt-4 max-w-2xl text-base leading-7 text-muted-foreground">
+                Categories are built for repeated use: clear names, scannable cards, and tools that actually do the job.
               </p>
             </div>
-            <Link
-              href="#more-tools"
-              className="inline-flex w-fit items-center gap-2 rounded-full border border-[#414755]/35 bg-[#201f1f]/70 px-4 py-2 text-sm font-semibold text-[#adc6ff] transition-colors hover:bg-[#2a2a2a]"
-            >
-              See more tools <ArrowRight className="h-4 w-4" />
-            </Link>
+            <div className="grid grid-cols-3 gap-2 rounded-[1.5rem] border bg-card/64 p-2 shadow-sm backdrop-blur">
+              {[
+                [String(tools.length), "tools"],
+                [String(categories.length), "sets"],
+                ["free", "access"],
+              ].map(([value, label]) => (
+                <div key={label} className="rounded-[1rem] bg-background/56 px-4 py-3 text-center">
+                  <div className="text-xl font-black tracking-[-0.04em]">{value}</div>
+                  <div className="text-[10px] font-black uppercase tracking-[0.12em] text-muted-foreground">{label}</div>
+                </div>
+              ))}
+            </div>
           </div>
 
-          <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
+          <div className="grid grid-cols-1 gap-5 md:grid-cols-2 lg:grid-cols-3">
             {categories.map((category) => (
               <CategoryCard
                 key={category.id}
@@ -122,31 +200,48 @@ export default function Home() {
         </div>
       </section>
 
-      <section id="more-tools" className="bg-[#131313] px-6 py-12 text-[#e5e2e1] md:py-20">
-        <div className="mx-auto max-w-[1200px]">
-          <h2 className="mb-12 text-[32px] font-semibold leading-tight tracking-[-0.02em] text-[#e5e2e1]">
-            More Tools
-          </h2>
+      <section id="more-tools" className="bg-background px-4 py-16 md:py-24">
+        <div className="container mx-auto">
+          <div className="mb-10">
+            <div className="az-section-label mb-3">Tool wall</div>
+            <h2 className="text-4xl font-black tracking-[-0.055em] md:text-6xl">Bookmark bait.</h2>
+          </div>
 
-          <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4 xl:grid-cols-5">
+          <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-5">
             {moreTools.map((tool) => {
               const Icon = tool.icon;
               return (
                 <Link
                   key={tool.id}
                   href={tool.path}
-                  className="group rounded-2xl border border-[#414755]/25 bg-[#201f1f]/60 p-4 transition-all duration-300 hover:-translate-y-1 hover:border-[#adc6ff]/35 hover:bg-[#2a2a2a]"
+                  className="group rounded-[1.4rem] border bg-card/70 p-4 shadow-sm backdrop-blur transition-all duration-300 hover:-translate-y-1 hover:border-primary/55 hover:bg-card"
                 >
-                  <div className="mb-5 flex h-10 w-10 items-center justify-center rounded-xl bg-[#2a2a2a] text-[#adc6ff] transition-colors group-hover:bg-[#adc6ff] group-hover:text-[#002e69]">
+                  <div className="mb-5 flex h-11 w-11 items-center justify-center rounded-2xl bg-primary/12 text-primary transition-colors group-hover:bg-primary group-hover:text-primary-foreground">
                     <Icon className="h-4 w-4" />
                   </div>
-                  <h3 className="line-clamp-2 min-h-10 text-sm font-semibold leading-5 text-[#e5e2e1]">
-                    {tool.name}
-                  </h3>
-                  <p className="mt-2 line-clamp-2 text-xs leading-5 text-[#c1c6d7]/80">{tool.description}</p>
+                  <h3 className="line-clamp-2 min-h-10 text-sm font-black leading-5 tracking-[-0.02em]">{tool.name}</h3>
+                  <p className="mt-2 line-clamp-2 text-xs leading-5 text-muted-foreground">{tool.description}</p>
                 </Link>
               );
             })}
+          </div>
+
+          <div className="mt-16 overflow-hidden rounded-[2rem] border bg-[linear-gradient(135deg,color-mix(in_oklch,var(--primary)_22%,var(--card)),var(--card)_48%,color-mix(in_oklch,var(--chart-4)_16%,var(--card)))] p-8 shadow-[0_34px_140px_-82px_rgba(0,0,0,0.9)] md:p-10">
+            <div className="grid gap-8 md:grid-cols-[1fr_auto] md:items-center">
+              <div>
+                <div className="mb-3 inline-flex items-center gap-2 rounded-full bg-background/50 px-4 py-2 text-xs font-black uppercase tracking-[0.14em] text-primary">
+                  <WandSparkles className="h-3.5 w-3.5" />
+                  Made for return visits
+                </div>
+                <h2 className="max-w-3xl text-4xl font-black tracking-[-0.055em] md:text-6xl">One tab. Dozens of useful outcomes.</h2>
+                <p className="mt-4 max-w-2xl text-base leading-7 text-muted-foreground">
+                  Keep AZ Tools close for file fixes, content work, developer chores, live lookups, and everyday calculations.
+                </p>
+              </div>
+              <Link href="/search" className="inline-flex items-center justify-center gap-2 rounded-full bg-primary px-6 py-4 text-sm font-black text-primary-foreground transition-transform hover:scale-[1.02]">
+                Find your tool <BadgeCheck className="h-4 w-4" />
+              </Link>
+            </div>
           </div>
         </div>
       </section>
