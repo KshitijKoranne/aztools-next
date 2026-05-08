@@ -2,7 +2,6 @@
 
 import { useEffect, useMemo, useRef, useState } from "react";
 import { useRouter } from "next/navigation";
-import Link from "next/link";
 import { motion } from "framer-motion";
 import { ArrowRight, Command, Search } from "lucide-react";
 
@@ -17,8 +16,6 @@ const featuredIds = [
   "qr-code-generator",
 ];
 
-const categoryIds = ["pdf-tools", "image-tools", "developer-tools", "live-data-tools"];
-
 export function HomeHero() {
   const [searchQuery, setSearchQuery] = useState("");
   const searchRef = useRef<HTMLFormElement | null>(null);
@@ -29,16 +26,6 @@ export function HomeHero() {
       featuredIds.flatMap((id) => {
         const tool = tools.find((item) => item.id === id);
         return tool ? [tool] : [];
-      }),
-    []
-  );
-
-  const keyCategories = useMemo(
-    () =>
-      categoryIds.flatMap((id) => {
-        const category = categories.find((item) => item.id === id);
-        if (!category) return [];
-        return [{ ...category, count: tools.filter((tool) => tool.category === category.id).length }];
       }),
     []
   );
@@ -87,26 +74,25 @@ export function HomeHero() {
 
   return (
     <section className="relative isolate overflow-hidden bg-black text-white">
-      <div className="absolute inset-0 bg-[linear-gradient(to_right,rgba(255,255,255,0.055)_1px,transparent_1px),linear-gradient(to_bottom,rgba(255,255,255,0.055)_1px,transparent_1px)] bg-[size:72px_72px] opacity-35" />
       <div className="absolute inset-x-0 bottom-0 h-40 bg-gradient-to-b from-transparent to-background" />
 
       <div className="container relative z-10 mx-auto px-4 py-16 md:py-24">
-        <div className="grid min-h-[650px] items-center gap-12 lg:grid-cols-[minmax(0,1fr)_380px]">
-          <div className="max-w-4xl">
+        <div className="flex min-h-[610px] items-center">
+          <div className="mx-auto max-w-4xl text-center">
             <motion.div
               initial={{ opacity: 0, y: 16 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.45 }}
-              className="mb-6 inline-flex rounded-full border border-white/14 px-4 py-2 text-xs font-black uppercase tracking-[0.18em] text-white/60"
+              className="mb-6 inline-flex rounded-full border border-white/12 px-4 py-2 text-xs font-semibold text-white/58"
             >
-              Free online tools
+              Free online tools. No account.
             </motion.div>
 
             <motion.h1
               initial={{ opacity: 0, y: 16 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.06, duration: 0.45 }}
-              className="max-w-4xl text-balance text-5xl font-black leading-[0.94] tracking-[-0.055em] md:text-7xl lg:text-8xl"
+              className="mx-auto max-w-4xl text-balance text-5xl font-black leading-[0.96] tracking-[-0.052em] md:text-7xl lg:text-8xl"
             >
               Open a tool.
               <span className="block text-white/58">Finish the job.</span>
@@ -116,7 +102,7 @@ export function HomeHero() {
               initial={{ opacity: 0, y: 16 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.12, duration: 0.45 }}
-              className="mt-7 max-w-2xl text-base font-medium leading-8 text-white/62 md:text-lg"
+              className="mx-auto mt-7 max-w-2xl text-base font-medium leading-8 text-white/62 md:text-lg"
             >
               PDFs, images, text, code, SEO, calculators, and live lookups in one fast browser workspace.
               No account. No fake demos. Just tools that work.
@@ -128,7 +114,7 @@ export function HomeHero() {
               initial={{ opacity: 0, y: 18 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.18, duration: 0.45 }}
-              className="relative z-30 mt-9 w-full max-w-3xl"
+              className="relative z-30 mx-auto mt-9 w-full max-w-3xl"
             >
               <div className="flex items-center rounded-[1.5rem] border border-white/16 bg-white/[0.06] p-2 shadow-[0_40px_120px_-80px_rgba(255,255,255,0.55)] backdrop-blur-xl transition-colors focus-within:border-white/40">
                 <Search className="ml-4 h-5 w-5 shrink-0 text-white/58" />
@@ -193,7 +179,7 @@ export function HomeHero() {
               initial={{ opacity: 0, y: 14 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.24, duration: 0.45 }}
-              className="mt-5 flex max-w-3xl flex-wrap gap-2"
+              className="mx-auto mt-5 flex max-w-3xl flex-wrap justify-center gap-2"
             >
               {featuredTools.map((tool) => (
                 <button
@@ -206,50 +192,25 @@ export function HomeHero() {
                 </button>
               ))}
             </motion.div>
-          </div>
 
-          <motion.div
-            initial={{ opacity: 0, y: 18 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.18, duration: 0.45 }}
-            className="rounded-[1.5rem] border border-white/14 bg-white/[0.045] p-3 backdrop-blur-xl"
-          >
-            <div className="grid grid-cols-3 gap-2 border-b border-white/10 pb-3">
+            <motion.div
+              initial={{ opacity: 0, y: 14 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.3, duration: 0.45 }}
+              className="mx-auto mt-9 grid max-w-xl grid-cols-3 divide-x divide-white/10 border-y border-white/10 py-5"
+            >
               {[
                 [String(tools.length), "tools"],
-                [String(categories.length), "sets"],
-                ["0", "logins"],
+                [String(categories.length), "categories"],
+                ["free", "access"],
               ].map(([value, label]) => (
-                <div key={label} className="rounded-2xl bg-white/[0.055] px-3 py-4 text-center">
+                <div key={label} className="px-4">
                   <div className="text-2xl font-black tracking-[-0.04em]">{value}</div>
-                  <div className="mt-1 text-[10px] font-black uppercase tracking-[0.12em] text-white/42">{label}</div>
+                  <div className="mt-1 text-xs font-semibold text-white/42">{label}</div>
                 </div>
               ))}
-            </div>
-
-            <div className="pt-3">
-              {keyCategories.map((category) => {
-                const Icon = category.icon;
-
-                return (
-                  <Link
-                    key={category.id}
-                    href={`/category/${category.id}`}
-                    className="group grid grid-cols-[auto_1fr_auto] items-center gap-3 rounded-2xl px-3 py-3 transition-colors hover:bg-white/[0.08]"
-                  >
-                    <span className="flex h-10 w-10 items-center justify-center rounded-xl bg-white/[0.08] text-white">
-                      <Icon className="h-4 w-4" />
-                    </span>
-                    <span>
-                      <span className="block text-sm font-black">{category.name}</span>
-                      <span className="text-xs font-semibold text-white/42">{category.count} tools</span>
-                    </span>
-                    <ArrowRight className="h-4 w-4 text-white/26 transition-transform group-hover:translate-x-1 group-hover:text-white" />
-                  </Link>
-                );
-              })}
-            </div>
-          </motion.div>
+            </motion.div>
+          </div>
         </div>
       </div>
     </section>

@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { ArrowRight, BadgeCheck, Cloud, FileText, ImageIcon, TerminalSquare, WandSparkles } from "lucide-react";
+import { ArrowRight, BadgeCheck, WandSparkles } from "lucide-react";
 
 import { CategoryCard } from "@/components/category-card";
 import { HomeHero } from "@/components/home-hero";
@@ -25,37 +25,6 @@ function getFeaturedTools(): Tool[] {
   });
 }
 
-const bentoBlocks = [
-  {
-    title: "File work without friction",
-    description: "Merge PDFs, compress images, extract text, inspect metadata, and keep files moving.",
-    href: "/category/pdf-tools",
-    icon: FileText,
-    className: "lg:col-span-2",
-  },
-  {
-    title: "Developer utilities",
-    description: "Format JSON, test regex, inspect repos, build schemas, and clean up code.",
-    href: "/category/developer-tools",
-    icon: TerminalSquare,
-    className: "",
-  },
-  {
-    title: "Image studio",
-    description: "Resize, crop, convert, compress, pick colors, and read EXIF data.",
-    href: "/category/image-tools",
-    icon: ImageIcon,
-    className: "",
-  },
-  {
-    title: "Live data lookups",
-    description: "Weather, holidays, country info, GitHub repo stats, SSL, DNS, IP, and more.",
-    href: "/category/live-data-tools",
-    icon: Cloud,
-    className: "lg:col-span-2",
-  },
-];
-
 export default function Home() {
   const featuredTools = getFeaturedTools();
   const moreTools = tools.slice(0, 30);
@@ -79,21 +48,20 @@ export default function Home() {
 
       <HomeHero />
 
-      <section id="featured-tools" className="relative overflow-hidden bg-background px-4 py-16 md:py-24">
-        <div className="absolute inset-0 az-grid opacity-25" />
-        <div className="container relative mx-auto">
+      <section id="featured-tools" className="bg-background px-4 py-16 md:py-24">
+        <div className="container mx-auto">
           <div className="mb-10 flex flex-col gap-4 md:flex-row md:items-end md:justify-between">
             <div>
-              <div className="az-section-label mb-3">Quick launch</div>
-              <h2 className="max-w-3xl text-4xl font-black tracking-[-0.055em] md:text-6xl">
-                Tools that feel one click away.
+              <div className="az-section-label mb-3">Start here</div>
+              <h2 className="max-w-3xl text-3xl font-black tracking-[-0.04em] md:text-5xl">
+                Common tools, ready.
               </h2>
             </div>
             <Link
               href="/search"
-              className="inline-flex w-fit items-center gap-2 rounded-full border bg-card/70 px-5 py-3 text-sm font-black text-foreground shadow-sm backdrop-blur transition-colors hover:bg-primary hover:text-primary-foreground"
+              className="inline-flex w-fit items-center gap-2 rounded-full border px-5 py-3 text-sm font-black text-foreground transition-colors hover:bg-foreground hover:text-background"
             >
-              Open directory <ArrowRight className="h-4 w-4" />
+              View all <ArrowRight className="h-4 w-4" />
             </Link>
           </div>
 
@@ -110,10 +78,10 @@ export default function Home() {
                 >
                   <div className="relative z-10 flex h-full flex-col">
                     <div className="flex items-start justify-between gap-4">
-                      <div className="flex h-14 w-14 items-center justify-center rounded-2xl border bg-background text-foreground">
+                      <div className="flex h-12 w-12 items-center justify-center rounded-2xl border bg-background text-foreground">
                         <Icon className="h-6 w-6" />
                       </div>
-                      <span className="rounded-full border bg-background/55 px-3 py-1 text-[11px] font-black uppercase tracking-[0.12em] text-muted-foreground">
+                      <span className="rounded-full border bg-background/55 px-3 py-1 text-[11px] font-semibold text-muted-foreground">
                         {category?.name ?? "Tool"}
                       </span>
                     </div>
@@ -129,42 +97,19 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="relative bg-background px-4 py-16 md:py-24">
-        <div className="container mx-auto">
-          <div className="grid gap-4 lg:grid-cols-3">
-            {bentoBlocks.map(({ title, description, href, icon: Icon, className }) => (
-              <Link key={title} href={href} className={`group relative min-h-[270px] overflow-hidden rounded-[1.25rem] border bg-card p-7 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:border-foreground/30 ${className}`}>
-                <div className="relative z-10 flex h-full flex-col">
-                  <div className="flex h-14 w-14 items-center justify-center rounded-2xl border bg-background text-foreground">
-                    <Icon className="h-6 w-6" />
-                  </div>
-                  <div className="mt-auto">
-                    <h3 className="max-w-md text-3xl font-black tracking-[-0.05em]">{title}</h3>
-                    <p className="mt-3 max-w-lg text-sm leading-6 text-muted-foreground">{description}</p>
-                    <span className="mt-5 inline-flex items-center gap-2 text-sm font-black text-foreground">
-                      Browse block <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
-                    </span>
-                  </div>
-                </div>
-              </Link>
-            ))}
-          </div>
-        </div>
-      </section>
-
       <section id="categories" className="bg-background px-4 py-16 md:py-24">
         <div className="container mx-auto">
           <div className="mb-10 flex flex-col gap-4 md:flex-row md:items-end md:justify-between">
             <div>
-              <div className="az-section-label mb-3">The map</div>
-              <h2 className="max-w-3xl text-4xl font-black tracking-[-0.055em] md:text-6xl">
-                A whole workshop, organized.
+              <div className="az-section-label mb-3">Categories</div>
+              <h2 className="max-w-3xl text-3xl font-black tracking-[-0.04em] md:text-5xl">
+                Everything has a place.
               </h2>
               <p className="mt-4 max-w-2xl text-base leading-7 text-muted-foreground">
-                Categories are built for repeated use: clear names, scannable cards, and tools that actually do the job.
+                Clear groups, scannable names, and tools that do what they say.
               </p>
             </div>
-            <div className="grid grid-cols-3 gap-2 rounded-[1.5rem] border bg-card/64 p-2 shadow-sm backdrop-blur">
+            <div className="grid grid-cols-3 gap-2 rounded-[1.25rem] border bg-card p-2 shadow-sm">
               {[
                 [String(tools.length), "tools"],
                 [String(categories.length), "sets"],
@@ -196,8 +141,8 @@ export default function Home() {
       <section id="more-tools" className="bg-background px-4 py-16 md:py-24">
         <div className="container mx-auto">
           <div className="mb-10">
-            <div className="az-section-label mb-3">Tool wall</div>
-            <h2 className="text-4xl font-black tracking-[-0.055em] md:text-6xl">Bookmark bait.</h2>
+            <div className="az-section-label mb-3">More tools</div>
+            <h2 className="text-3xl font-black tracking-[-0.04em] md:text-5xl">Useful extras.</h2>
           </div>
 
           <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-5">
@@ -207,8 +152,8 @@ export default function Home() {
                 <Link
                   key={tool.id}
                   href={tool.path}
-                className="group rounded-[1.25rem] border bg-card p-4 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:border-foreground/30"
-              >
+                  className="group rounded-[1.25rem] border bg-card p-4 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:border-foreground/30"
+                >
                   <div className="mb-5 flex h-11 w-11 items-center justify-center rounded-2xl border bg-background text-foreground">
                     <Icon className="h-4 w-4" />
                   </div>
@@ -226,7 +171,7 @@ export default function Home() {
                   <WandSparkles className="h-3.5 w-3.5" />
                   Made for return visits
                 </div>
-                <h2 className="max-w-3xl text-4xl font-black tracking-[-0.055em] md:text-6xl">One tab. Dozens of useful outcomes.</h2>
+                <h2 className="max-w-3xl text-3xl font-black tracking-[-0.04em] md:text-5xl">One tab. Many small wins.</h2>
                 <p className="mt-4 max-w-2xl text-base leading-7 text-muted-foreground">
                   Keep AZ Tools close for file fixes, content work, developer chores, live lookups, and everyday calculations.
                 </p>
