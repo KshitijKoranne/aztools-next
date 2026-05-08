@@ -13,9 +13,8 @@ import { tools } from "@/data/tools";
 import { MobileNav } from "@/components/mobile-nav";
 
 const navLinks = [
-  { label: "Tools", href: "/#featured-tools" },
+  { label: "Tools", href: "/search" },
   { label: "Categories", href: "/#categories" },
-  { label: "More", href: "/#more-tools" },
 ];
 
 export function Header() {
