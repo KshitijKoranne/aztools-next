@@ -69,7 +69,10 @@ import {
   Trash2,
   Code2,
   Mail,
-  Receipt
+  Receipt,
+  CalendarDays,
+  CloudSun,
+  Globe2
 } from "lucide-react";
 import type { LucideIcon } from "lucide-react";
 
@@ -173,6 +176,12 @@ export const categories: Category[] = [
     name: "Productivity Tools",
     description: "Tools to boost productivity and manage time effectively.",
     icon: TrendingUp
+  },
+  {
+    id: "live-data-tools",
+    name: "Live Data Tools",
+    description: "API-powered lookups for real-world data, weather, countries, holidays, and repositories.",
+    icon: CloudSun
   },
   {
     id: "random-tools",
@@ -1156,6 +1165,40 @@ export const tools: Tool[] = [
     category: "finance-tools",
     icon: Receipt,
     path: "/tools/gst-calculator"
+  },
+
+  // Live Data Tools
+  {
+    id: "weather-forecast",
+    name: "Weather Forecast",
+    description: "Get a live 7-day forecast for any city using free Open-Meteo weather data.",
+    category: "live-data-tools",
+    icon: CloudSun,
+    path: "/tools/weather-forecast"
+  },
+  {
+    id: "public-holiday-finder",
+    name: "Public Holiday Finder",
+    description: "Find public holidays by country and year using live Nager.Date holiday data.",
+    category: "live-data-tools",
+    icon: CalendarDays,
+    path: "/tools/public-holiday-finder"
+  },
+  {
+    id: "country-info-lookup",
+    name: "Country Info Lookup",
+    description: "Look up capitals, currencies, languages, maps, borders, and timezones for countries.",
+    category: "live-data-tools",
+    icon: Globe2,
+    path: "/tools/country-info-lookup"
+  },
+  {
+    id: "github-repo-inspector",
+    name: "GitHub Repo Inspector",
+    description: "Inspect public repository stars, forks, license, language, topics, and recent activity.",
+    category: "live-data-tools",
+    icon: GitBranch,
+    path: "/tools/github-repo-inspector"
   }
 ];
 
