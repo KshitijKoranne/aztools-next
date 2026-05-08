@@ -32,7 +32,6 @@ const bentoBlocks = [
     href: "/category/pdf-tools",
     icon: FileText,
     className: "lg:col-span-2",
-    glow: "from-[var(--az-mint)]/24",
   },
   {
     title: "Developer utilities",
@@ -40,7 +39,6 @@ const bentoBlocks = [
     href: "/category/developer-tools",
     icon: TerminalSquare,
     className: "",
-    glow: "from-[var(--az-cyan)]/22",
   },
   {
     title: "Image studio",
@@ -48,7 +46,6 @@ const bentoBlocks = [
     href: "/category/image-tools",
     icon: ImageIcon,
     className: "",
-    glow: "from-[var(--az-rose)]/20",
   },
   {
     title: "Live data lookups",
@@ -56,7 +53,6 @@ const bentoBlocks = [
     href: "/category/live-data-tools",
     icon: Cloud,
     className: "lg:col-span-2",
-    glow: "from-[var(--az-violet)]/22",
   },
 ];
 
@@ -110,11 +106,11 @@ export default function Home() {
                 <Link
                   key={tool.id}
                   href={tool.path}
-                  className={`group az-card min-h-[230px] p-5 ${index === 0 || index === 3 ? "lg:col-span-2" : ""}`}
+                  className={`group min-h-[230px] rounded-[1.25rem] border bg-card p-5 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:border-foreground/30 ${index === 0 || index === 3 ? "lg:col-span-2" : ""}`}
                 >
                   <div className="relative z-10 flex h-full flex-col">
                     <div className="flex items-start justify-between gap-4">
-                      <div className="flex h-14 w-14 items-center justify-center rounded-2xl bg-primary text-primary-foreground shadow-[0_24px_80px_-45px_color-mix(in_oklch,var(--primary)_80%,#000)]">
+                      <div className="flex h-14 w-14 items-center justify-center rounded-2xl border bg-background text-foreground">
                         <Icon className="h-6 w-6" />
                       </div>
                       <span className="rounded-full border bg-background/55 px-3 py-1 text-[11px] font-black uppercase tracking-[0.12em] text-muted-foreground">
@@ -122,7 +118,7 @@ export default function Home() {
                       </span>
                     </div>
                     <div className="mt-auto">
-                      <h3 className="text-2xl font-black tracking-[-0.04em] transition-colors group-hover:text-primary">{tool.name}</h3>
+                      <h3 className="text-2xl font-black tracking-[-0.04em]">{tool.name}</h3>
                       <p className="mt-2 line-clamp-2 text-sm leading-6 text-muted-foreground">{tool.description}</p>
                     </div>
                   </div>
@@ -136,19 +132,16 @@ export default function Home() {
       <section className="relative bg-background px-4 py-16 md:py-24">
         <div className="container mx-auto">
           <div className="grid gap-4 lg:grid-cols-3">
-            {bentoBlocks.map(({ title, description, href, icon: Icon, className, glow }) => (
-              <Link key={title} href={href} className={`group relative min-h-[270px] overflow-hidden rounded-[2rem] border bg-card p-7 shadow-[0_30px_120px_-82px_rgba(0,0,0,0.9)] ${className}`}>
-                <div className={`absolute inset-0 bg-gradient-to-br ${glow} via-transparent to-transparent opacity-70 transition-opacity group-hover:opacity-100`} />
-                <div className="absolute -right-12 -top-12 h-40 w-40 rounded-full border border-foreground/10" />
-                <div className="absolute -right-4 top-10 h-24 w-24 rounded-full border border-foreground/10" />
+            {bentoBlocks.map(({ title, description, href, icon: Icon, className }) => (
+              <Link key={title} href={href} className={`group relative min-h-[270px] overflow-hidden rounded-[1.25rem] border bg-card p-7 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:border-foreground/30 ${className}`}>
                 <div className="relative z-10 flex h-full flex-col">
-                  <div className="flex h-14 w-14 items-center justify-center rounded-2xl border bg-background/60 text-primary">
+                  <div className="flex h-14 w-14 items-center justify-center rounded-2xl border bg-background text-foreground">
                     <Icon className="h-6 w-6" />
                   </div>
                   <div className="mt-auto">
                     <h3 className="max-w-md text-3xl font-black tracking-[-0.05em]">{title}</h3>
                     <p className="mt-3 max-w-lg text-sm leading-6 text-muted-foreground">{description}</p>
-                    <span className="mt-5 inline-flex items-center gap-2 text-sm font-black text-primary">
+                    <span className="mt-5 inline-flex items-center gap-2 text-sm font-black text-foreground">
                       Browse block <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
                     </span>
                   </div>
@@ -214,9 +207,9 @@ export default function Home() {
                 <Link
                   key={tool.id}
                   href={tool.path}
-                  className="group rounded-[1.4rem] border bg-card/70 p-4 shadow-sm backdrop-blur transition-all duration-300 hover:-translate-y-1 hover:border-primary/55 hover:bg-card"
-                >
-                  <div className="mb-5 flex h-11 w-11 items-center justify-center rounded-2xl bg-primary/12 text-primary transition-colors group-hover:bg-primary group-hover:text-primary-foreground">
+                className="group rounded-[1.25rem] border bg-card p-4 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:border-foreground/30"
+              >
+                  <div className="mb-5 flex h-11 w-11 items-center justify-center rounded-2xl border bg-background text-foreground">
                     <Icon className="h-4 w-4" />
                   </div>
                   <h3 className="line-clamp-2 min-h-10 text-sm font-black leading-5 tracking-[-0.02em]">{tool.name}</h3>
@@ -226,10 +219,10 @@ export default function Home() {
             })}
           </div>
 
-          <div className="mt-16 overflow-hidden rounded-[2rem] border bg-[linear-gradient(135deg,color-mix(in_oklch,var(--primary)_22%,var(--card)),var(--card)_48%,color-mix(in_oklch,var(--chart-4)_16%,var(--card)))] p-8 shadow-[0_34px_140px_-82px_rgba(0,0,0,0.9)] md:p-10">
+          <div className="mt-16 overflow-hidden rounded-[1.5rem] border bg-card p-8 shadow-sm md:p-10">
             <div className="grid gap-8 md:grid-cols-[1fr_auto] md:items-center">
               <div>
-                <div className="mb-3 inline-flex items-center gap-2 rounded-full bg-background/50 px-4 py-2 text-xs font-black uppercase tracking-[0.14em] text-primary">
+                <div className="mb-3 inline-flex items-center gap-2 rounded-full border bg-background px-4 py-2 text-xs font-black uppercase tracking-[0.14em] text-muted-foreground">
                   <WandSparkles className="h-3.5 w-3.5" />
                   Made for return visits
                 </div>
@@ -238,7 +231,7 @@ export default function Home() {
                   Keep AZ Tools close for file fixes, content work, developer chores, live lookups, and everyday calculations.
                 </p>
               </div>
-              <Link href="/search" className="inline-flex items-center justify-center gap-2 rounded-full bg-primary px-6 py-4 text-sm font-black text-primary-foreground transition-transform hover:scale-[1.02]">
+              <Link href="/search" className="inline-flex items-center justify-center gap-2 rounded-full bg-foreground px-6 py-4 text-sm font-black text-background transition-opacity hover:opacity-85">
                 Find your tool <BadgeCheck className="h-4 w-4" />
               </Link>
             </div>
