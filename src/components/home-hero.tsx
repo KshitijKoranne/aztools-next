@@ -2,37 +2,18 @@
 
 import { useEffect, useMemo, useRef, useState } from "react";
 import { useRouter } from "next/navigation";
-import { motion } from "framer-motion";
-import { ArrowRight, Command, Search } from "lucide-react";
+import { Search } from "lucide-react";
 
 import { categories, tools } from "@/data/tools";
-
-const featuredIds = [
-  "pdf-merger",
-  "image-compressor",
-  "json-formatter",
-  "weather-forecast",
-  "password-generator",
-  "qr-code-generator",
-];
 
 export function HomeHero() {
   const [searchQuery, setSearchQuery] = useState("");
   const searchRef = useRef<HTMLFormElement | null>(null);
   const router = useRouter();
 
-  const featuredTools = useMemo(
-    () =>
-      featuredIds.flatMap((id) => {
-        const tool = tools.find((item) => item.id === id);
-        return tool ? [tool] : [];
-      }),
-    []
-  );
-
   const matchingTools = useMemo(() => {
     const q = searchQuery.trim().toLowerCase();
-    if (!q) return featuredTools;
+    if (!q) return [];
 
     return tools.filter((tool) => {
       const category = categories.find((item) => item.id === tool.category);
@@ -43,7 +24,7 @@ export function HomeHero() {
         category?.name.toLowerCase().includes(q)
       );
     });
-  }, [featuredTools, searchQuery]);
+  }, [searchQuery]);
 
   const searchResults = matchingTools.slice(0, 8);
   const totalResults = matchingTools.length;
@@ -60,7 +41,7 @@ export function HomeHero() {
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, []);
 
-  const openPath = (path: string) => {
+  const openTool = (path: string) => {
     setSearchQuery("");
     router.push(path);
   };
@@ -68,151 +49,96 @@ export function HomeHero() {
   const submitSearch = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     const q = searchQuery.trim();
-    router.push(q ? `/search?q=${encodeURIComponent(q)}` : "/search");
+
+    if (q) {
+      router.push(`/search?q=${encodeURIComponent(q)}`);
+    } else {
+      router.push("/search");
+    }
+
     setSearchQuery("");
   };
 
   return (
-    <section className="relative isolate overflow-hidden bg-black text-white">
-      <div className="absolute inset-x-0 bottom-0 h-40 bg-gradient-to-b from-transparent to-background" />
+    <section className="mx-auto flex min-h-[614px] max-w-[1200px] flex-col items-center justify-center gap-10 px-6 py-20 text-center text-[#e5e2e1]">
+      <div className="max-w-3xl space-y-2">
+        <h1 className="text-5xl font-bold leading-[1.1] tracking-[-0.04em] text-[#e5e2e1] md:text-6xl">
+          We have a tool for that!
+        </h1>
+        <p className="text-lg leading-[1.6] text-[#c1c6d7]">
+          Free, simple, and useful tools for everyday tasks.
+        </p>
+      </div>
 
-      <div className="container relative z-10 mx-auto px-4 py-16 md:py-24">
-        <div className="flex min-h-[610px] items-center">
-          <div className="mx-auto max-w-4xl text-center">
-            <motion.div
-              initial={{ opacity: 0, y: 16 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.45 }}
-              className="mb-6 inline-flex rounded-full border border-white/12 px-4 py-2 text-xs font-semibold text-white/58"
-            >
-              Free online tools. No account.
-            </motion.div>
+      <form ref={searchRef} onSubmit={submitSearch} className="relative z-20 w-full max-w-2xl">
+        <div className="relative z-10 flex items-center rounded-full border border-white/10 bg-white/[0.055] p-1 shadow-sm backdrop-blur-xl transition-all duration-300 focus-within:border-white/28 focus-within:ring-2 focus-within:ring-white/10">
+          <Search className="ml-4 h-5 w-5 shrink-0 text-white/45" />
+          <input
+            name="q"
+            type="search"
+            placeholder="Search for a tool..."
+            value={searchQuery}
+            onChange={(event) => setSearchQuery(event.target.value)}
+            className="w-full border-none bg-transparent px-4 py-3 text-base text-[#e5e2e1] outline-none placeholder:text-white/28 focus:ring-0"
+            autoComplete="off"
+          />
+          <button
+            type="submit"
+            className="whitespace-nowrap rounded-full bg-white px-6 py-3 text-base font-semibold text-black transition-opacity hover:opacity-90"
+          >
+            Explore Tools
+          </button>
+        </div>
 
-            <motion.h1
-              initial={{ opacity: 0, y: 16 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.06, duration: 0.45 }}
-              className="mx-auto max-w-4xl text-balance text-5xl font-black leading-[0.96] tracking-[-0.052em] md:text-7xl lg:text-8xl"
-            >
-              Open a tool.
-              <span className="block text-white/58">Finish the job.</span>
-            </motion.h1>
+        {isSearching && searchResults.length > 0 && (
+          <div className="absolute left-0 right-0 top-full z-30 mt-3 overflow-hidden rounded-3xl border border-white/10 bg-[#201f1f]/95 p-2 text-left shadow-2xl backdrop-blur-2xl">
+            {searchResults.map((tool) => {
+              const Icon = tool.icon;
+              const category = categories.find((item) => item.id === tool.category);
 
-            <motion.p
-              initial={{ opacity: 0, y: 16 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.12, duration: 0.45 }}
-              className="mx-auto mt-7 max-w-2xl text-base font-medium leading-8 text-white/62 md:text-lg"
-            >
-              PDFs, images, text, code, SEO, calculators, and live lookups in one fast browser workspace.
-              No account. No fake demos. Just tools that work.
-            </motion.p>
-
-            <motion.form
-              ref={searchRef}
-              onSubmit={submitSearch}
-              initial={{ opacity: 0, y: 18 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.18, duration: 0.45 }}
-              className="relative z-30 mx-auto mt-9 w-full max-w-3xl"
-            >
-              <div className="flex items-center rounded-[1.5rem] border border-white/16 bg-white/[0.06] p-2 shadow-[0_40px_120px_-80px_rgba(255,255,255,0.55)] backdrop-blur-xl transition-colors focus-within:border-white/40">
-                <Search className="ml-4 h-5 w-5 shrink-0 text-white/58" />
-                <input
-                  name="q"
-                  type="search"
-                  placeholder="Search PDF, image, JSON, weather..."
-                  value={searchQuery}
-                  onChange={(event) => setSearchQuery(event.target.value)}
-                  className="w-full border-none bg-transparent px-4 py-4 text-base font-semibold text-white outline-none placeholder:text-white/35 focus:ring-0"
-                  autoComplete="off"
-                />
-                <button
-                  type="submit"
-                  className="hidden whitespace-nowrap rounded-[1.1rem] bg-white px-6 py-4 text-sm font-black text-black transition-colors hover:bg-white/86 md:inline-flex"
-                >
-                  Search
-                </button>
-              </div>
-
-              {isSearching && (
-                <div className="absolute left-0 right-0 top-full z-30 mt-3 max-h-[430px] overflow-auto rounded-[1.25rem] border border-white/14 bg-black/94 p-2 text-left shadow-2xl backdrop-blur-xl">
-                  <div className="flex items-center justify-between px-3 py-2 text-xs font-black uppercase tracking-[0.15em] text-white/42">
-                    <span>{totalResults} matches</span>
-                    <Command className="h-3.5 w-3.5" />
-                  </div>
-                  {searchResults.length > 0 ? (
-                    searchResults.map((tool) => {
-                      const Icon = tool.icon;
-                      const category = categories.find((item) => item.id === tool.category);
-
-                      return (
-                        <button
-                          key={tool.id}
-                          type="button"
-                          onClick={() => openPath(tool.path)}
-                          className="group grid w-full grid-cols-[auto_1fr_auto] items-center gap-3 rounded-2xl px-3 py-3 text-left transition-colors hover:bg-white/[0.08]"
-                        >
-                          <span className="flex h-10 w-10 items-center justify-center rounded-xl bg-white/[0.08] text-white">
-                            <Icon className="h-4 w-4" />
-                          </span>
-                          <span className="min-w-0">
-                            <span className="block truncate text-sm font-black text-white">{tool.name}</span>
-                            <span className="block truncate text-xs font-medium text-white/45">
-                              {category?.name ?? "Tool"} / {tool.description}
-                            </span>
-                          </span>
-                          <ArrowRight className="h-4 w-4 text-white/28 transition-transform group-hover:translate-x-1 group-hover:text-white" />
-                        </button>
-                      );
-                    })
-                  ) : (
-                    <div className="rounded-2xl px-4 py-5 text-sm font-medium text-white/54">
-                      No matching tools found. Press Enter to search all tools.
-                    </div>
-                  )}
-                </div>
-              )}
-            </motion.form>
-
-            <motion.div
-              initial={{ opacity: 0, y: 14 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.24, duration: 0.45 }}
-              className="mx-auto mt-5 flex max-w-3xl flex-wrap justify-center gap-2"
-            >
-              {featuredTools.map((tool) => (
+              return (
                 <button
                   key={tool.id}
                   type="button"
-                  onClick={() => openPath(tool.path)}
-                  className="rounded-full border border-white/12 bg-white/[0.04] px-3 py-2 text-xs font-black text-white/60 transition-colors hover:border-white/35 hover:bg-white hover:text-black"
+                  onClick={() => openTool(tool.path)}
+                  className="group grid w-full grid-cols-[auto_1fr] items-center gap-3 rounded-2xl px-3 py-3 text-left transition-colors hover:bg-white/[0.07]"
                 >
-                  {tool.name}
+                  <span className="flex h-10 w-10 items-center justify-center rounded-xl bg-white/[0.08] text-white transition-colors group-hover:bg-white group-hover:text-black">
+                    <Icon className="h-4 w-4" />
+                  </span>
+                  <span className="min-w-0">
+                    <span className="block truncate text-sm font-semibold text-[#e5e2e1]">
+                      {tool.name}
+                    </span>
+                    <span className="block truncate text-xs text-[#c1c6d7]/75">
+                      {category?.name ?? "Tool"} · {tool.description}
+                    </span>
+                  </span>
                 </button>
-              ))}
-            </motion.div>
+              );
+            })}
 
-            <motion.div
-              initial={{ opacity: 0, y: 14 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.3, duration: 0.45 }}
-              className="mx-auto mt-9 grid max-w-xl grid-cols-3 divide-x divide-white/10 border-y border-white/10 py-5"
-            >
-              {[
-                [String(tools.length), "tools"],
-                [String(categories.length), "categories"],
-                ["free", "access"],
-              ].map(([value, label]) => (
-                <div key={label} className="px-4">
-                  <div className="text-2xl font-black tracking-[-0.04em]">{value}</div>
-                  <div className="mt-1 text-xs font-semibold text-white/42">{label}</div>
-                </div>
-              ))}
-            </motion.div>
+            {totalResults > searchResults.length && (
+              <button
+                type="button"
+                onClick={() => {
+                  router.push(`/search?q=${encodeURIComponent(searchQuery.trim())}`);
+                  setSearchQuery("");
+                }}
+                className="mt-2 w-full rounded-2xl bg-white px-4 py-3 text-center text-sm font-semibold text-black transition-opacity hover:opacity-90"
+              >
+                View all {totalResults} results
+              </button>
+            )}
           </div>
-        </div>
-      </div>
+        )}
+
+        {isSearching && searchResults.length === 0 && (
+          <div className="absolute left-0 right-0 top-full z-30 mt-3 rounded-3xl border border-white/10 bg-[#201f1f]/95 p-5 text-left text-sm text-[#c1c6d7] shadow-2xl backdrop-blur-2xl">
+            No matching tools found. Press Enter to search all tools.
+          </div>
+        )}
+      </form>
     </section>
   );
 }

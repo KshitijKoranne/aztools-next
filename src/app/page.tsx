@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { ArrowRight, BadgeCheck, WandSparkles } from "lucide-react";
+import { ArrowRight } from "lucide-react";
 
 import { CategoryCard } from "@/components/category-card";
 import { HomeHero } from "@/components/home-hero";
@@ -9,25 +9,26 @@ import { jsonLd, siteUrl } from "@/lib/seo";
 
 function getFeaturedTools(): Tool[] {
   const featuredIds = [
-    "pdf-merger",
-    "image-compressor",
     "json-formatter",
-    "weather-forecast",
-    "country-info-lookup",
-    "password-generator",
+    "image-compressor",
+    "text-statistics",
+    "pdf-merger",
     "qr-code-generator",
     "unit-converter",
   ];
 
-  return featuredIds.flatMap((id) => {
+  const picked = featuredIds.flatMap((id) => {
     const tool = tools.find((item) => item.id === id);
     return tool ? [tool] : [];
   });
+
+  const fillers = tools.filter((tool) => !featuredIds.includes(tool.id));
+  return [...picked, ...fillers].slice(0, 6);
 }
 
 export default function Home() {
   const featuredTools = getFeaturedTools();
-  const moreTools = tools.slice(0, 30);
+  const moreTools = tools.slice(0, 25);
 
   return (
     <MainLayout>
@@ -48,25 +49,14 @@ export default function Home() {
 
       <HomeHero />
 
-      <section id="featured-tools" className="bg-background px-4 py-16 md:py-24">
-        <div className="container mx-auto">
-          <div className="mb-10 flex flex-col gap-4 md:flex-row md:items-end md:justify-between">
-            <div>
-              <div className="az-section-label mb-3">Start here</div>
-              <h2 className="max-w-3xl text-3xl font-black tracking-[-0.04em] md:text-5xl">
-                Common tools, ready.
-              </h2>
-            </div>
-            <Link
-              href="/search"
-              className="inline-flex w-fit items-center gap-2 rounded-full border px-5 py-3 text-sm font-black text-foreground transition-colors hover:bg-foreground hover:text-background"
-            >
-              View all <ArrowRight className="h-4 w-4" />
-            </Link>
-          </div>
+      <section id="featured-tools" className="bg-[#131313] px-6 py-12 text-[#e5e2e1] md:py-20">
+        <div className="mx-auto max-w-[1200px]">
+          <h2 className="mb-12 text-[32px] font-semibold leading-tight tracking-[-0.02em] text-[#e5e2e1]">
+            Featured Tools
+          </h2>
 
-          <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
-            {featuredTools.map((tool, index) => {
+          <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
+            {featuredTools.map((tool) => {
               const Icon = tool.icon;
               const category = categories.find((item) => item.id === tool.category);
 
@@ -74,21 +64,21 @@ export default function Home() {
                 <Link
                   key={tool.id}
                   href={tool.path}
-                  className={`group min-h-[230px] rounded-[1.25rem] border bg-card p-5 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:border-foreground/30 ${index === 0 || index === 3 ? "lg:col-span-2" : ""}`}
+                  className="group relative flex min-h-[230px] cursor-pointer flex-col gap-4 overflow-hidden rounded-3xl border border-white/10 bg-[#201f1f]/70 p-6 shadow-sm backdrop-blur-xl transition-all duration-300 hover:-translate-y-1 hover:border-white/22"
                 >
-                  <div className="relative z-10 flex h-full flex-col">
-                    <div className="flex items-start justify-between gap-4">
-                      <div className="flex h-12 w-12 items-center justify-center rounded-2xl border bg-background text-foreground">
-                        <Icon className="h-6 w-6" />
-                      </div>
-                      <span className="rounded-full border bg-background/55 px-3 py-1 text-[11px] font-semibold text-muted-foreground">
-                        {category?.name ?? "Tool"}
-                      </span>
+                  <div className="relative z-10 flex items-start justify-between">
+                    <div className="flex h-12 w-12 items-center justify-center rounded-2xl border border-white/10 bg-white/[0.06] text-white transition-colors group-hover:bg-white group-hover:text-black">
+                      <Icon className="h-6 w-6" />
                     </div>
-                    <div className="mt-auto">
-                      <h3 className="text-2xl font-black tracking-[-0.04em]">{tool.name}</h3>
-                      <p className="mt-2 line-clamp-2 text-sm leading-6 text-muted-foreground">{tool.description}</p>
-                    </div>
+                    <span className="rounded-full border border-white/10 bg-white/[0.05] px-3 py-1 text-[12px] font-semibold text-[#c1c6d7]">
+                      {category?.name ?? "Tool"}
+                    </span>
+                  </div>
+                  <div className="relative z-10 mt-auto">
+                    <h3 className="mb-1 text-2xl font-semibold leading-snug tracking-[-0.01em] text-[#e5e2e1]">
+                      {tool.name}
+                    </h3>
+                    <p className="text-sm leading-6 text-[#c1c6d7]">{tool.description}</p>
                   </div>
                 </Link>
               );
@@ -97,33 +87,26 @@ export default function Home() {
         </div>
       </section>
 
-      <section id="categories" className="bg-background px-4 py-16 md:py-24">
-        <div className="container mx-auto">
-          <div className="mb-10 flex flex-col gap-4 md:flex-row md:items-end md:justify-between">
+      <section id="categories" className="bg-[#131313] px-6 py-12 text-[#e5e2e1] md:py-20">
+        <div className="mx-auto max-w-[1200px]">
+          <div className="mb-12 flex flex-col gap-4 md:flex-row md:items-end md:justify-between">
             <div>
-              <div className="az-section-label mb-3">Categories</div>
-              <h2 className="max-w-3xl text-3xl font-black tracking-[-0.04em] md:text-5xl">
-                Everything has a place.
+              <h2 className="text-[32px] font-semibold leading-tight tracking-[-0.02em] text-[#e5e2e1]">
+                Browse by Category
               </h2>
-              <p className="mt-4 max-w-2xl text-base leading-7 text-muted-foreground">
-                Clear groups, scannable names, and tools that do what they say.
+              <p className="mt-2 max-w-2xl text-base leading-7 text-[#c1c6d7]">
+                Tools grouped with care so you can reach the right utility quickly.
               </p>
             </div>
-            <div className="grid grid-cols-3 gap-2 rounded-[1.25rem] border bg-card p-2 shadow-sm">
-              {[
-                [String(tools.length), "tools"],
-                [String(categories.length), "sets"],
-                ["free", "access"],
-              ].map(([value, label]) => (
-                <div key={label} className="rounded-[1rem] bg-background/56 px-4 py-3 text-center">
-                  <div className="text-xl font-black tracking-[-0.04em]">{value}</div>
-                  <div className="text-[10px] font-black uppercase tracking-[0.12em] text-muted-foreground">{label}</div>
-                </div>
-              ))}
-            </div>
+            <Link
+              href="#more-tools"
+              className="inline-flex w-fit items-center gap-2 rounded-full border border-white/10 bg-[#201f1f]/70 px-4 py-2 text-sm font-semibold text-[#e5e2e1] transition-colors hover:bg-white hover:text-black"
+            >
+              See more tools <ArrowRight className="h-4 w-4" />
+            </Link>
           </div>
 
-          <div className="grid grid-cols-1 gap-5 md:grid-cols-2 lg:grid-cols-3">
+          <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
             {categories.map((category) => (
               <CategoryCard
                 key={category.id}
@@ -138,48 +121,31 @@ export default function Home() {
         </div>
       </section>
 
-      <section id="more-tools" className="bg-background px-4 py-16 md:py-24">
-        <div className="container mx-auto">
-          <div className="mb-10">
-            <div className="az-section-label mb-3">More tools</div>
-            <h2 className="text-3xl font-black tracking-[-0.04em] md:text-5xl">Useful extras.</h2>
-          </div>
+      <section id="more-tools" className="bg-[#131313] px-6 py-12 text-[#e5e2e1] md:py-20">
+        <div className="mx-auto max-w-[1200px]">
+          <h2 className="mb-12 text-[32px] font-semibold leading-tight tracking-[-0.02em] text-[#e5e2e1]">
+            More Tools
+          </h2>
 
-          <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-5">
+          <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4 xl:grid-cols-5">
             {moreTools.map((tool) => {
               const Icon = tool.icon;
               return (
                 <Link
                   key={tool.id}
                   href={tool.path}
-                  className="group rounded-[1.25rem] border bg-card p-4 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:border-foreground/30"
+                  className="group rounded-2xl border border-white/10 bg-[#201f1f]/60 p-4 transition-all duration-300 hover:-translate-y-1 hover:border-white/22 hover:bg-[#242424]"
                 >
-                  <div className="mb-5 flex h-11 w-11 items-center justify-center rounded-2xl border bg-background text-foreground">
+                  <div className="mb-5 flex h-10 w-10 items-center justify-center rounded-xl border border-white/10 bg-white/[0.06] text-white transition-colors group-hover:bg-white group-hover:text-black">
                     <Icon className="h-4 w-4" />
                   </div>
-                  <h3 className="line-clamp-2 min-h-10 text-sm font-black leading-5 tracking-[-0.02em]">{tool.name}</h3>
-                  <p className="mt-2 line-clamp-2 text-xs leading-5 text-muted-foreground">{tool.description}</p>
+                  <h3 className="line-clamp-2 min-h-10 text-sm font-semibold leading-5 text-[#e5e2e1]">
+                    {tool.name}
+                  </h3>
+                  <p className="mt-2 line-clamp-2 text-xs leading-5 text-[#c1c6d7]/80">{tool.description}</p>
                 </Link>
               );
             })}
-          </div>
-
-          <div className="mt-16 overflow-hidden rounded-[1.5rem] border bg-card p-8 shadow-sm md:p-10">
-            <div className="grid gap-8 md:grid-cols-[1fr_auto] md:items-center">
-              <div>
-                <div className="mb-3 inline-flex items-center gap-2 rounded-full border bg-background px-4 py-2 text-xs font-black uppercase tracking-[0.14em] text-muted-foreground">
-                  <WandSparkles className="h-3.5 w-3.5" />
-                  Made for return visits
-                </div>
-                <h2 className="max-w-3xl text-3xl font-black tracking-[-0.04em] md:text-5xl">One tab. Many small wins.</h2>
-                <p className="mt-4 max-w-2xl text-base leading-7 text-muted-foreground">
-                  Keep AZ Tools close for file fixes, content work, developer chores, live lookups, and everyday calculations.
-                </p>
-              </div>
-              <Link href="/search" className="inline-flex items-center justify-center gap-2 rounded-full bg-foreground px-6 py-4 text-sm font-black text-background transition-opacity hover:opacity-85">
-                Find your tool <BadgeCheck className="h-4 w-4" />
-              </Link>
-            </div>
           </div>
         </div>
       </section>
