@@ -134,11 +134,6 @@
   }
   body {
     @apply bg-background text-foreground;
-    background-image:
-      radial-gradient(circle at 12% -10%, color-mix(in oklch, var(--primary) 18%, transparent), transparent 34rem),
-      radial-gradient(circle at 88% 4%, color-mix(in oklch, var(--chart-4) 11%, transparent), transparent 28rem),
-      linear-gradient(180deg, color-mix(in oklch, var(--foreground) 4%, transparent), transparent 28rem);
-    background-attachment: fixed;
     font-feature-settings: "ss01", "cv05", "cv11";
   }
   html {
@@ -153,30 +148,12 @@
   }
 
   .az-card {
-    @apply relative overflow-hidden rounded-[1.5rem] border bg-card/82 shadow-[0_24px_90px_-58px_rgba(0,0,0,0.95)] backdrop-blur transition-all duration-300;
-  }
-
-  .az-card::before {
-    content: "";
-    position: absolute;
-    inset: 0;
-    pointer-events: none;
-    background:
-      linear-gradient(135deg, color-mix(in oklch, var(--primary) 18%, transparent), transparent 44%),
-      radial-gradient(circle at 82% 18%, color-mix(in oklch, var(--chart-4) 16%, transparent), transparent 38%);
-    opacity: 0;
-    transition: opacity 240ms ease;
-  }
-
-  .group:hover .az-card::before,
-  .az-card:hover::before {
-    opacity: 1;
+    @apply relative overflow-hidden rounded-[1.5rem] border bg-card shadow-sm transition-all duration-300;
   }
 
   .az-card:hover {
-    transform: translateY(-5px) scale(1.01);
-    border-color: color-mix(in oklch, var(--primary) 58%, var(--border));
-    box-shadow: 0 34px 110px -62px color-mix(in oklch, var(--primary) 70%, #000);
+    transform: translateY(-4px);
+    border-color: color-mix(in oklch, var(--foreground) 28%, var(--border));
   }
 
   .az-chrome {

@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { ArrowLeft, Layers3, Sparkles } from "lucide-react";
+import { ArrowLeft } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
 import { MainLayout } from "@/components/layouts/main-layout";
@@ -75,43 +75,31 @@ export default async function CategoryPage({ params }: { params: Params }) {
         ])}
       />
 
-      <div className="relative min-h-[70vh] overflow-hidden bg-background">
-        <div className="absolute inset-0 az-grid opacity-30" />
-        <div className="absolute inset-x-0 top-0 h-[28rem] bg-[radial-gradient(circle_at_50%_0%,color-mix(in_oklch,var(--primary)_22%,transparent),transparent_62%)]" />
-
-        <div className="container relative mx-auto px-4 py-10 md:py-14">
-          <section className="mb-8 overflow-hidden rounded-[2.2rem] border bg-card/74 p-5 shadow-[0_34px_140px_-82px_rgba(0,0,0,0.9)] backdrop-blur-2xl md:p-8">
+      <div className="min-h-[70vh] bg-[#131313] text-[#e5e2e1]">
+        <div className="container mx-auto px-4 py-10 md:py-14">
+          <section className="mb-8 rounded-3xl border border-white/10 bg-[#201f1f]/70 p-5 shadow-sm md:p-8">
             <div className="grid gap-8 lg:grid-cols-[1fr_auto] lg:items-end">
               <div>
-                <Button variant="ghost" size="sm" asChild className="mb-8 rounded-full">
+                <Button variant="ghost" size="sm" asChild className="mb-8 rounded-full text-white/62 hover:bg-white/[0.08] hover:text-white">
                   <Link href="/">
                     <ArrowLeft className="h-4 w-4" />
                     Home
                   </Link>
                 </Button>
                 <div className="mb-5 flex items-center gap-4">
-                  <div className="flex h-16 w-16 items-center justify-center rounded-3xl bg-primary text-primary-foreground shadow-[0_26px_100px_-52px_color-mix(in_oklch,var(--primary)_90%,#000)]">
+                  <div className="flex h-16 w-16 items-center justify-center rounded-3xl border border-white/10 bg-white/[0.06] text-white">
                     <Icon className="h-7 w-7" />
                   </div>
                   <div>
-                    <div className="az-section-label mb-2">Category</div>
-                    <h1 className="text-4xl font-black leading-tight tracking-[-0.055em] md:text-7xl">{category.name}</h1>
+                    <h1 className="text-4xl font-semibold leading-tight tracking-[-0.04em] md:text-6xl">{category.name}</h1>
                   </div>
                 </div>
-                <p className="max-w-3xl text-base leading-7 text-muted-foreground md:text-lg">{category.description}</p>
+                <p className="max-w-3xl text-base leading-7 text-[#c1c6d7] md:text-lg">{category.description}</p>
               </div>
 
-              <div className="grid min-w-64 gap-3 rounded-[1.6rem] border bg-background/50 p-4">
-                <div className="flex items-center gap-3">
-                  <Layers3 className="h-5 w-5 text-primary" />
-                  <div>
-                    <div className="text-3xl font-black tracking-[-0.05em]">{tools.length}</div>
-                    <div className="text-xs font-black uppercase tracking-[0.12em] text-muted-foreground">tools inside</div>
-                  </div>
-                </div>
-                <div className="rounded-[1.1rem] bg-primary/10 px-4 py-3 text-sm font-bold text-primary">
-                  Built for quick repeated use.
-                </div>
+              <div className="min-w-44 rounded-3xl border border-white/10 bg-white/[0.04] p-5">
+                <div className="text-3xl font-semibold tracking-[-0.04em]">{tools.length}</div>
+                <div className="mt-1 text-sm text-white/48">{tools.length === 1 ? "tool" : "tools"}</div>
               </div>
             </div>
           </section>
@@ -121,10 +109,10 @@ export default async function CategoryPage({ params }: { params: Params }) {
               <Link
                 key={item.id}
                 href={`/category/${item.id}`}
-                className={`rounded-full border px-4 py-2 text-xs font-black uppercase tracking-[0.12em] transition-colors ${
+                className={`rounded-full border px-4 py-2 text-xs font-semibold transition-colors ${
                   item.id === category.id
-                    ? "border-primary bg-primary text-primary-foreground"
-                    : "bg-card/60 text-muted-foreground hover:border-primary/55 hover:text-primary"
+                    ? "border-white bg-white text-black"
+                    : "border-white/10 bg-[#201f1f]/60 text-white/54 hover:border-white/24 hover:text-white"
                 }`}
               >
                 {item.name}
@@ -133,7 +121,7 @@ export default async function CategoryPage({ params }: { params: Params }) {
           </div>
 
           {tools.length === 0 ? (
-            <div className="rounded-[2rem] border bg-card p-8 text-muted-foreground">No tools in this category yet.</div>
+            <div className="rounded-3xl border border-white/10 bg-[#201f1f]/70 p-8 text-white/56">No tools in this category yet.</div>
           ) : (
             <div className="grid grid-cols-1 gap-5 md:grid-cols-2 lg:grid-cols-3">
               {tools.map((tool) => (
@@ -141,13 +129,6 @@ export default async function CategoryPage({ params }: { params: Params }) {
               ))}
             </div>
           )}
-
-          <div className="mt-10 rounded-[2rem] border bg-card/74 p-6 backdrop-blur">
-            <div className="flex items-center gap-3 text-sm font-black text-primary">
-              <Sparkles className="h-4 w-4" />
-              Tip: use the top search bar when you already know the task.
-            </div>
-          </div>
         </div>
       </div>
     </MainLayout>
