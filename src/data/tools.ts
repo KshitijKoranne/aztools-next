@@ -241,6 +241,22 @@ export const tools: Tool[] = [
     icon: BarChart3,
     path: "/tools/text-statistics"
   },
+  {
+    id: "slug-generator",
+    name: "Slug Generator",
+    description: "Create clean URL slugs from titles, headings, and product names.",
+    category: "text-utilities",
+    icon: Hash,
+    path: "/tools/slug-generator"
+  },
+  {
+    id: "list-sorter",
+    name: "List Sorter",
+    description: "Sort, reverse, deduplicate, and clean newline-separated lists.",
+    category: "text-utilities",
+    icon: AlignLeft,
+    path: "/tools/list-sorter"
+  },
   
   // Developer Tools
   {
@@ -905,6 +921,22 @@ export const tools: Tool[] = [
     category: "data-tools",
     icon: Database,
     path: "/tools/csv-to-json"
+  },
+  {
+    id: "json-to-csv",
+    name: "JSON to CSV Converter",
+    description: "Convert JSON arrays and objects into CSV with custom delimiters.",
+    category: "data-tools",
+    icon: Database,
+    path: "/tools/json-to-csv"
+  },
+  {
+    id: "yaml-to-json",
+    name: "YAML to JSON Converter",
+    description: "Convert YAML documents to formatted or compact JSON.",
+    category: "data-tools",
+    icon: FileCode,
+    path: "/tools/yaml-to-json"
   },
   {
     id: "xml-formatter",
