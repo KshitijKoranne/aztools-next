@@ -24,14 +24,14 @@ export default function Home() {
 
       <HomeHero />
 
-      <section id="categories" className="bg-[#131313] px-6 py-12 text-[#e5e2e1] md:py-20">
+      <section id="categories" className="bg-background px-6 py-12 text-foreground md:py-20">
         <div className="mx-auto max-w-[1200px]">
           <div className="mb-12">
             <div>
-              <h2 className="text-[32px] font-semibold leading-tight tracking-[-0.02em] text-[#e5e2e1]">
+              <h2 className="text-[32px] font-semibold leading-tight tracking-[-0.02em] text-foreground">
                 Choose a category
               </h2>
-              <p className="mt-2 max-w-2xl text-base leading-7 text-[#c1c6d7]">
+              <p className="mt-2 max-w-2xl text-base leading-7 text-muted-foreground">
                 Convert, compress, calculate, inspect, generate, and clean up everyday work from one place.
               </p>
             </div>

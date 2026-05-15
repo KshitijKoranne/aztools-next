@@ -78,7 +78,7 @@ export default function Client() {
             <CardHeader><CardTitle>{result.country} holidays in {result.year}</CardTitle></CardHeader>
             <CardContent className="space-y-3">
               {result.holidays.map((holiday) => (
-                <div key={`${holiday.date}-${holiday.name}`} className="grid gap-2 rounded-md border border-white/10 bg-white/[0.03] p-3 md:grid-cols-[9rem_1fr_auto] md:items-center">
+                <div key={`${holiday.date}-${holiday.name}`} className="grid gap-2 rounded-md border bg-muted/30 p-3 md:grid-cols-[9rem_1fr_auto] md:items-center">
                   <div className="font-mono text-sm font-bold text-primary">{prettyDate(holiday.date)}</div>
                   <div>
                     <div className="font-black">{holiday.name}</div>

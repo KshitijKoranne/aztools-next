@@ -96,7 +96,7 @@ export default function Client() {
                 <CardContent className="grid gap-5 py-5 lg:grid-cols-[12rem_1fr]">
                   <div className="space-y-3">
                     {country.flags?.png && (
-                      <Image src={country.flags.png} alt={country.flags.alt ?? `${country.name.common} flag`} width={220} height={140} className="rounded-md border border-white/10 object-cover" unoptimized />
+                      <Image src={country.flags.png} alt={country.flags.alt ?? `${country.name.common} flag`} width={220} height={140} className="rounded-md border object-cover" unoptimized />
                     )}
                     <Button asChild variant="outline" className="w-full">
                       <a href={country.maps?.googleMaps ?? country.maps?.openStreetMaps ?? "#"} target="_blank" rel="noopener noreferrer">
@@ -132,7 +132,7 @@ export default function Client() {
 
 function Info({ label, value }: { label: string; value: string }) {
   return (
-    <div className="rounded-md border border-white/10 bg-white/[0.03] p-3">
+    <div className="rounded-md border bg-muted/30 p-3">
       <div className="text-xs font-bold uppercase text-muted-foreground">{label}</div>
       <div className="mt-1 text-sm font-semibold">{value}</div>
     </div>

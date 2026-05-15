@@ -119,7 +119,7 @@ export default function Client() {
             {result.topics.length > 0 && (
               <div className="flex flex-wrap gap-2">
                 {result.topics.map((topic) => (
-                  <span key={topic} className="rounded-full border border-white/10 bg-white/[0.04] px-3 py-1 text-sm font-bold text-muted-foreground">{topic}</span>
+                  <span key={topic} className="rounded-full border bg-muted/30 px-3 py-1 text-sm font-bold text-muted-foreground">{topic}</span>
                 ))}
               </div>
             )}
@@ -132,7 +132,7 @@ export default function Client() {
 
 function Metric({ icon, label, value }: { icon?: ReactNode; label: string; value: string }) {
   return (
-    <div className="rounded-md border border-white/10 bg-white/[0.03] p-4">
+    <div className="rounded-md border bg-muted/30 p-4">
       <div className="flex items-center gap-2 text-xs font-bold uppercase text-muted-foreground">{icon}{label}</div>
       <div className="mt-2 text-2xl font-black">{value}</div>
     </div>
@@ -141,7 +141,7 @@ function Metric({ icon, label, value }: { icon?: ReactNode; label: string; value
 
 function Info({ label, value }: { label: string; value: string }) {
   return (
-    <div className="rounded-md border border-white/10 bg-white/[0.03] p-3">
+    <div className="rounded-md border bg-muted/30 p-3">
       <div className="text-xs font-bold uppercase text-muted-foreground">{label}</div>
       <div className="mt-1 font-semibold">{value}</div>
     </div>

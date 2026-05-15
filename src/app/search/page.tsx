@@ -36,21 +36,21 @@ export default async function SearchPage({ searchParams }: SearchPageProps) {
 
   return (
     <MainLayout>
-      <main className="min-h-[70vh] bg-[#131313] px-6 py-12 text-[#e5e2e1] md:py-20">
+      <main className="min-h-[70vh] bg-background px-6 py-12 text-foreground md:py-20">
         <div className="mx-auto max-w-[1200px]">
           <Link
             href="/"
-            className="mb-8 inline-flex items-center gap-2 rounded-full border border-[#414755]/35 bg-[#201f1f]/70 px-4 py-2 text-sm font-semibold text-[#adc6ff] transition-colors hover:bg-[#2a2a2a]"
+            className="mb-8 inline-flex items-center gap-2 rounded-full border bg-card px-4 py-2 text-sm font-semibold text-muted-foreground transition-colors hover:bg-accent hover:text-accent-foreground"
           >
             <ArrowLeft className="h-4 w-4" /> Back home
           </Link>
 
-          <section className="mb-12 rounded-[2rem] border border-[#414755]/25 bg-[#201f1f]/70 p-6 shadow-sm backdrop-blur-xl md:p-10">
+          <section className="mb-12 rounded-[2rem] border bg-card p-6 shadow-sm md:p-10">
             <div className="mb-6 max-w-3xl">
-              <h1 className="text-4xl font-bold leading-tight tracking-[-0.04em] text-[#e5e2e1] md:text-5xl">
+              <h1 className="text-4xl font-bold leading-tight tracking-[-0.04em] text-foreground md:text-5xl">
                 Search tools
               </h1>
-              <p className="mt-3 text-base leading-7 text-[#c1c6d7]">
+              <p className="mt-3 text-base leading-7 text-muted-foreground">
                 {query
                   ? `${results.length} result${results.length === 1 ? "" : "s"} for “${query}”.`
                   : `Search or browse all ${tools.length} tools.`}
@@ -58,18 +58,18 @@ export default async function SearchPage({ searchParams }: SearchPageProps) {
             </div>
 
             <form action="/search" className="relative max-w-2xl">
-              <div className="flex items-center rounded-full border border-[#8b90a0]/10 bg-[#131313]/70 p-1 shadow-lg backdrop-blur-2xl transition-all duration-300 focus-within:border-[#adc6ff] focus-within:ring-2 focus-within:ring-[#adc6ff]">
-                <Search className="ml-4 h-5 w-5 shrink-0 text-[#8b90a0]" />
+              <div className="flex items-center rounded-full border bg-background p-1 shadow-sm transition-all duration-300 focus-within:border-ring/40 focus-within:ring-2 focus-within:ring-ring/20">
+                <Search className="ml-4 h-5 w-5 shrink-0 text-muted-foreground" />
                 <input
                   name="q"
                   type="search"
                   defaultValue={query}
                   placeholder="Search for a tool..."
-                  className="w-full border-none bg-transparent px-4 py-3 text-base text-[#e5e2e1] outline-none placeholder:text-[#414755] focus:ring-0"
+                  className="w-full border-none bg-transparent px-4 py-3 text-base text-foreground outline-none placeholder:text-muted-foreground focus:ring-0"
                 />
                 <button
                   type="submit"
-                  className="whitespace-nowrap rounded-full bg-[#adc6ff] px-6 py-3 text-base font-medium text-[#002e69] transition-opacity hover:opacity-90"
+                  className="whitespace-nowrap rounded-full bg-foreground px-6 py-3 text-base font-medium text-background transition-opacity hover:opacity-90"
                 >
                   Search
                 </button>
@@ -86,23 +86,22 @@ export default async function SearchPage({ searchParams }: SearchPageProps) {
                   <Link
                     key={tool.id}
                     href={tool.path}
-                    className="group relative flex min-h-[210px] flex-col gap-4 overflow-hidden rounded-3xl border border-[#414755]/25 bg-[#201f1f]/70 p-6 shadow-sm backdrop-blur-xl transition-all duration-300 hover:scale-[1.02] hover:border-[#adc6ff]/30 hover:shadow-md"
+                    className="group relative flex min-h-[210px] flex-col gap-4 overflow-hidden rounded-3xl border bg-card p-6 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:border-foreground/25"
                   >
-                    <div className="absolute inset-0 bg-gradient-to-br from-[#adc6ff]/5 to-transparent opacity-0 transition-opacity group-hover:opacity-100" />
                     <div className="relative z-10 flex items-start justify-between gap-4">
-                      <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-[#2a2a2a] text-[#adc6ff] transition-colors group-hover:bg-[#adc6ff] group-hover:text-[#002e69]">
+                      <div className="flex h-12 w-12 items-center justify-center rounded-2xl border bg-background text-foreground transition-colors group-hover:bg-foreground group-hover:text-background">
                         <Icon className="h-6 w-6" />
                       </div>
-                      <span className="rounded-lg bg-[#353534] px-2 py-1 text-[12px] font-semibold uppercase tracking-[0.05em] text-[#c1c6d7]">
+                      <span className="rounded-full border bg-background px-3 py-1 text-[12px] font-semibold text-muted-foreground">
                         {category?.name ?? "Tool"}
                       </span>
                     </div>
                     <div className="relative z-10 mt-auto">
-                      <h2 className="mb-1 text-2xl font-semibold leading-snug tracking-[-0.01em] text-[#e5e2e1]">
+                      <h2 className="mb-1 text-2xl font-semibold leading-snug tracking-[-0.01em] text-card-foreground">
                         {tool.name}
                       </h2>
-                      <p className="text-sm leading-6 text-[#c1c6d7]">{tool.description}</p>
-                      <div className="mt-5 inline-flex items-center gap-2 text-sm font-semibold text-[#adc6ff] transition-all group-hover:gap-3">
+                      <p className="text-sm leading-6 text-muted-foreground">{tool.description}</p>
+                      <div className="mt-5 inline-flex items-center gap-2 text-sm font-semibold text-muted-foreground transition-all group-hover:gap-3 group-hover:text-foreground">
                         Open tool <ArrowRight className="h-4 w-4" />
                       </div>
                     </div>
@@ -111,9 +110,9 @@ export default async function SearchPage({ searchParams }: SearchPageProps) {
               })}
             </section>
           ) : (
-            <section className="rounded-[2rem] border border-[#414755]/25 bg-[#201f1f]/70 p-8 text-center shadow-sm backdrop-blur-xl">
-              <h2 className="text-2xl font-semibold text-[#e5e2e1]">No tools found</h2>
-              <p className="mt-2 text-[#c1c6d7]">Try a different keyword like PDF, image, JSON, text, calculator, or SEO.</p>
+            <section className="rounded-[2rem] border bg-card p-8 text-center shadow-sm">
+              <h2 className="text-2xl font-semibold text-card-foreground">No tools found</h2>
+              <p className="mt-2 text-muted-foreground">Try a different keyword like PDF, image, JSON, text, calculator, or SEO.</p>
             </section>
           )}
         </div>

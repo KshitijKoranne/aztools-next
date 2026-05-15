@@ -75,31 +75,31 @@ export default async function CategoryPage({ params }: { params: Params }) {
         ])}
       />
 
-      <div className="min-h-[70vh] bg-[#131313] text-[#e5e2e1]">
+      <div className="min-h-[70vh] bg-background text-foreground">
         <div className="container mx-auto px-4 py-10 md:py-14">
-          <section className="mb-8 rounded-3xl border border-white/10 bg-[#201f1f]/70 p-5 shadow-sm md:p-8">
+          <section className="mb-8 rounded-3xl border bg-card p-5 shadow-sm md:p-8">
             <div className="grid gap-8 lg:grid-cols-[1fr_auto] lg:items-end">
               <div>
-                <Button variant="ghost" size="sm" asChild className="mb-8 rounded-full text-white/62 hover:bg-white/[0.08] hover:text-white">
+                <Button variant="ghost" size="sm" asChild className="mb-8 rounded-full">
                   <Link href="/">
                     <ArrowLeft className="h-4 w-4" />
                     Home
                   </Link>
                 </Button>
                 <div className="mb-5 flex items-center gap-4">
-                  <div className="flex h-16 w-16 items-center justify-center rounded-3xl border border-white/10 bg-white/[0.06] text-white">
+                  <div className="flex h-16 w-16 items-center justify-center rounded-3xl border bg-background text-foreground">
                     <Icon className="h-7 w-7" />
                   </div>
                   <div>
                     <h1 className="text-4xl font-semibold leading-tight tracking-[-0.04em] md:text-6xl">{category.name}</h1>
                   </div>
                 </div>
-                <p className="max-w-3xl text-base leading-7 text-[#c1c6d7] md:text-lg">{category.description}</p>
+                <p className="max-w-3xl text-base leading-7 text-muted-foreground md:text-lg">{category.description}</p>
               </div>
 
-              <div className="min-w-44 rounded-3xl border border-white/10 bg-white/[0.04] p-5">
+              <div className="min-w-44 rounded-3xl border bg-background p-5">
                 <div className="text-3xl font-semibold tracking-[-0.04em]">{tools.length}</div>
-                <div className="mt-1 text-sm text-white/48">{tools.length === 1 ? "tool" : "tools"}</div>
+                <div className="mt-1 text-sm text-muted-foreground">{tools.length === 1 ? "tool" : "tools"}</div>
               </div>
             </div>
           </section>
@@ -111,8 +111,8 @@ export default async function CategoryPage({ params }: { params: Params }) {
                 href={`/category/${item.id}`}
                 className={`rounded-full border px-4 py-2 text-xs font-semibold transition-colors ${
                   item.id === category.id
-                    ? "border-white bg-white text-black"
-                    : "border-white/10 bg-[#201f1f]/60 text-white/54 hover:border-white/24 hover:text-white"
+                    ? "border-foreground bg-foreground text-background"
+                    : "bg-card text-muted-foreground hover:border-foreground/25 hover:text-foreground"
                 }`}
               >
                 {item.name}
@@ -121,7 +121,7 @@ export default async function CategoryPage({ params }: { params: Params }) {
           </div>
 
           {tools.length === 0 ? (
-            <div className="rounded-3xl border border-white/10 bg-[#201f1f]/70 p-8 text-white/56">No tools in this category yet.</div>
+            <div className="rounded-3xl border bg-card p-8 text-muted-foreground">No tools in this category yet.</div>
           ) : (
             <div className="grid grid-cols-1 gap-5 md:grid-cols-2 lg:grid-cols-3">
               {tools.map((tool) => (
