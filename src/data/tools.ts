@@ -142,6 +142,12 @@ export const categories: Category[] = [
     icon: Globe
   },
   {
+    id: "web-tools",
+    name: "Web Tools",
+    description: "Inspect URLs, headers, metadata, user agents, and front-end details.",
+    icon: Globe2
+  },
+  {
     id: "security-tools",
     name: "Security Tools",
     description: "Security and privacy utilities for safe computing.",
@@ -379,6 +385,14 @@ export const tools: Tool[] = [
     category: "developer-tools",
     icon: FileCode,
     path: "/tools/yaml-validator"
+  },
+  {
+    id: "css-specificity-calculator",
+    name: "CSS Specificity Calculator",
+    description: "Calculate selector specificity and compare CSS selector weight.",
+    category: "developer-tools",
+    icon: Code2,
+    path: "/tools/css-specificity-calculator"
   },
   {
     id: "css-formatter",
@@ -807,6 +821,40 @@ export const tools: Tool[] = [
     category: "seo-tools",
     icon: Heading1,
     path: "/tools/heading-structure"
+  },
+
+  // Web Tools
+  {
+    id: "url-parser",
+    name: "URL Parser",
+    description: "Break down URLs into protocol, host, path, query parameters, and hash.",
+    category: "web-tools",
+    icon: Globe2,
+    path: "/tools/url-parser"
+  },
+  {
+    id: "user-agent-parser",
+    name: "User Agent Parser",
+    description: "Parse browser, operating system, device type, and rendering engine from user agent strings.",
+    category: "web-tools",
+    icon: Search,
+    path: "/tools/user-agent-parser"
+  },
+  {
+    id: "http-headers-parser",
+    name: "HTTP Headers Parser",
+    description: "Parse raw HTTP request or response headers into a readable table.",
+    category: "web-tools",
+    icon: Server,
+    path: "/tools/http-headers-parser"
+  },
+  {
+    id: "html-meta-extractor",
+    name: "HTML Meta Extractor",
+    description: "Extract title, meta tags, Open Graph tags, Twitter cards, canonicals, and icons from HTML.",
+    category: "web-tools",
+    icon: FileCode,
+    path: "/tools/html-meta-extractor"
   },
 
   // Additional tools for existing categories
