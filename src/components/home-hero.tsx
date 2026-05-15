@@ -5,6 +5,7 @@ import { useRouter } from "next/navigation";
 import { Search } from "lucide-react";
 
 import { categories, tools } from "@/data/tools";
+import { StripeBgGuides } from "@/components/ui/stripe-bg-guides";
 
 export function HomeHero() {
   const [searchQuery, setSearchQuery] = useState("");
@@ -61,7 +62,42 @@ export function HomeHero() {
 
   return (
     <section className="relative isolate overflow-hidden text-foreground">
-      <div aria-hidden className="az-hero-guides absolute inset-0 -z-10" />
+      <div
+        aria-hidden
+        className="absolute inset-0 -z-10 overflow-hidden opacity-80 [mask-image:radial-gradient(ellipse_at_50%_38%,black_0%,transparent_72%)]"
+      >
+        <StripeBgGuides
+          contained
+          columnCount={7}
+          animated
+          animationDuration={14}
+          animationDelay={0.35}
+          glowColor="var(--primary)"
+          glowOpacity={0.34}
+          glowSize="18vh"
+          randomize
+          randomInterval={4200}
+          direction="both"
+          easing="easeInOut"
+          className="dark:hidden"
+        />
+        <StripeBgGuides
+          contained
+          columnCount={7}
+          animated
+          animationDuration={14}
+          animationDelay={0.35}
+          glowColor="var(--primary)"
+          glowOpacity={0.42}
+          glowSize="18vh"
+          randomize
+          randomInterval={4200}
+          direction="both"
+          easing="easeInOut"
+          darkMode
+          className="hidden dark:block"
+        />
+      </div>
       <div className="mx-auto flex min-h-[614px] max-w-[1200px] flex-col items-center justify-center gap-10 px-6 py-20 text-center">
         <div className="max-w-3xl space-y-2">
           <h1 className="font-[family-name:var(--font-display)] text-6xl font-normal leading-[0.95] tracking-[-0.035em] text-foreground md:text-8xl">
