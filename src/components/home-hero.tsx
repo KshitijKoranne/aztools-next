@@ -64,34 +64,34 @@ export function HomeHero() {
     <section className="relative isolate overflow-hidden text-foreground">
       <div
         aria-hidden
-        className="absolute inset-0 -z-10 overflow-hidden opacity-80 [mask-image:radial-gradient(ellipse_at_50%_38%,black_0%,transparent_72%)]"
+        className="absolute inset-0 -z-10 overflow-hidden opacity-100 [mask-image:linear-gradient(to_bottom,transparent_0%,black_15%,black_82%,transparent_100%)]"
       >
         <StripeBgGuides
           contained
-          columnCount={7}
+          columnCount={10}
           animated
-          animationDuration={14}
-          animationDelay={0.35}
-          glowColor="var(--primary)"
-          glowOpacity={0.34}
-          glowSize="18vh"
+          animationDuration={5.5}
+          animationDelay={0.12}
+          glowColor="#16a34a"
+          glowOpacity={0.92}
+          glowSize="34vh"
           randomize
-          randomInterval={4200}
+          randomInterval={2800}
           direction="both"
           easing="easeInOut"
           className="dark:hidden"
         />
         <StripeBgGuides
           contained
-          columnCount={7}
+          columnCount={10}
           animated
-          animationDuration={14}
-          animationDelay={0.35}
-          glowColor="var(--primary)"
-          glowOpacity={0.42}
-          glowSize="18vh"
+          animationDuration={5.5}
+          animationDelay={0.12}
+          glowColor="#7cffc0"
+          glowOpacity={0.95}
+          glowSize="34vh"
           randomize
-          randomInterval={4200}
+          randomInterval={2800}
           direction="both"
           easing="easeInOut"
           darkMode

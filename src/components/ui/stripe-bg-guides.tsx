@@ -141,8 +141,12 @@ export function StripeBgGuides({
 
   const lineColors = useMemo(() => {
     return {
-      solid: darkMode ? "hsl(233 14% 13%)" : "hsl(233 14.1% 96.1%)",
-      dashed: darkMode ? "hsl(233 14% 20%)" : "hsl(233 14% 93%)",
+      solid: darkMode
+        ? "color-mix(in oklch, var(--foreground) 24%, transparent)"
+        : "color-mix(in oklch, var(--foreground) 18%, transparent)",
+      dashed: darkMode
+        ? "color-mix(in oklch, var(--foreground) 20%, transparent)"
+        : "color-mix(in oklch, var(--foreground) 14%, transparent)",
     }
   }, [darkMode])
 
@@ -195,9 +199,7 @@ export function StripeBgGuides({
                       className="absolute w-full"
                       style={{
                         height: glowSize,
-                        background: `linear-gradient(to bottom, transparent, ${glowColor}, ${
-                          darkMode ? "black" : "white"
-                        })`,
+                        background: `linear-gradient(to bottom, transparent, ${glowColor}, transparent)`,
                         opacity: glowOpacity,
                       }}
                       initial={
