@@ -1279,6 +1279,38 @@ export const tools: Tool[] = [
     category: "live-data-tools",
     icon: GitBranch,
     path: "/tools/github-repo-inspector"
+  },
+  {
+    id: "npm-package-inspector",
+    name: "NPM Package Inspector",
+    description: "Look up live npm package metadata, latest version, maintainers, repository, and weekly downloads.",
+    category: "developer-tools",
+    icon: Code2,
+    path: "/tools/npm-package-inspector"
+  },
+  {
+    id: "crypto-price-checker",
+    name: "Crypto Price Checker",
+    description: "Check live crypto spot prices for popular assets using a free public price API.",
+    category: "finance-tools",
+    icon: TrendingUp,
+    path: "/tools/crypto-price-checker"
+  },
+  {
+    id: "dictionary-lookup",
+    name: "Dictionary Lookup",
+    description: "Look up English word definitions, phonetics, examples, synonyms, and audio.",
+    category: "text-utilities",
+    icon: BookOpen,
+    path: "/tools/dictionary-lookup"
+  },
+  {
+    id: "mac-vendor-lookup",
+    name: "MAC Vendor Lookup",
+    description: "Find the manufacturer or vendor registered to a MAC address or OUI prefix.",
+    category: "it-tools",
+    icon: Server,
+    path: "/tools/mac-vendor-lookup"
   }
 ];
 
