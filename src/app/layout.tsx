@@ -1,5 +1,5 @@
 import type { Metadata, Viewport } from "next";
-import { Fredoka, Nunito } from "next/font/google";
+import { Caveat, Fredoka, Nunito } from "next/font/google";
 
 import "./globals.css";
 
@@ -15,6 +15,12 @@ const fredoka = Fredoka({
   variable: "--font-display",
   subsets: ["latin"],
   weight: ["400", "500", "600", "700"],
+});
+
+const caveat = Caveat({
+  variable: "--font-script",
+  subsets: ["latin"],
+  weight: ["500", "600", "700"],
 });
 
 export const metadata: Metadata = {
@@ -78,7 +84,7 @@ export default function RootLayout({
 }: Readonly<{ children: React.ReactNode }>) {
   return (
     <html lang="en">
-      <body className={`${nunito.variable} ${fredoka.variable}`}>
+      <body className={`${nunito.variable} ${fredoka.variable} ${caveat.variable}`}>
         {children}
       </body>
     </html>

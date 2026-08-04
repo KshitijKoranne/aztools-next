@@ -32,6 +32,7 @@ html {
 body {
   --display: var(--font-display), Arial, sans-serif;
   --sans: var(--font-sans), Arial, sans-serif;
+  --script: var(--font-script), "Brush Script MT", cursive;
   margin: 0;
   background: var(--paper);
   color: var(--ink);
@@ -96,10 +97,10 @@ button {
 }
 
 .site-header__inner {
-  display: flex;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr);
   min-height: 68px;
   align-items: center;
-  justify-content: space-between;
   gap: 24px;
 }
 
@@ -132,7 +133,17 @@ button {
   margin-top: -1px;
 }
 
+.site-header__title {
+  color: var(--ink);
+  font-family: var(--script);
+  font-size: clamp(1.55rem, 3vw, 1.85rem);
+  font-weight: 700;
+  line-height: 1;
+  transform: rotate(-2deg);
+}
+
 .site-nav {
+  justify-self: end;
   display: flex;
   align-items: center;
   gap: 20px;

@@ -26,6 +26,8 @@ function SiteHeader() {
           <span className="site-wordmark__name">tools</span>
         </Link>
 
+        <span className="site-header__title">AZ Tools</span>
+
         <nav className="site-nav" aria-label="Primary navigation">
           <a href="https://kjrlabs.in/" target="_blank" rel="noopener noreferrer">
             KJR Labs
