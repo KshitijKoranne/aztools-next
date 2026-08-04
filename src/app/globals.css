@@ -9,8 +9,6 @@
   --accent-soft: #dce8ff;
   --accent-pale: #eef5ff;
   --white: #ffffff;
-  --display: var(--font-display), Arial, sans-serif;
-  --sans: var(--font-sans), Arial, sans-serif;
   --mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
 }
 
@@ -32,6 +30,8 @@ html {
 }
 
 body {
+  --display: var(--font-display), Arial, sans-serif;
+  --sans: var(--font-sans), Arial, sans-serif;
   margin: 0;
   background: var(--paper);
   color: var(--ink);
