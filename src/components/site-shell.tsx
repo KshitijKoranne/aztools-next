@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Link from "next/link";
 import { ArrowUpRight } from "lucide-react";
 import type { ReactNode } from "react";
@@ -20,10 +21,7 @@ function SiteHeader() {
     <header className="site-header">
       <div className="site-header__inner">
         <Link className="site-wordmark" href="/" aria-label="AZ Tools home">
-          <span className="site-wordmark__mark" aria-hidden="true">
-            AZ
-          </span>
-          <span className="site-wordmark__name">tools</span>
+          <Image className="site-wordmark__logo" src="/favicon-32x32.png" alt="" width={40} height={40} priority />
         </Link>
 
         <span className="site-header__title">AZ Tools</span>

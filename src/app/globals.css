@@ -107,30 +107,14 @@ button {
 .site-wordmark {
   display: inline-flex;
   align-items: center;
-  gap: 9px;
   min-height: 44px;
-  font-family: var(--display);
-  font-size: 1.25rem;
-  font-weight: 500;
-  letter-spacing: -0.04em;
 }
 
-.site-wordmark__mark {
-  display: grid;
-  width: 32px;
-  height: 32px;
-  place-items: center;
-  border-radius: 10px;
-  background: var(--ink);
-  color: var(--paper);
-  font-family: var(--mono);
-  font-size: 0.58rem;
-  font-weight: 700;
-  letter-spacing: -0.08em;
-}
-
-.site-wordmark__name {
-  margin-top: -1px;
+.site-wordmark__logo {
+  display: block;
+  width: 40px;
+  height: 40px;
+  object-fit: contain;
 }
 
 .site-header__title {
