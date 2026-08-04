@@ -1,19 +1,20 @@
 import type { Metadata, Viewport } from "next";
-import { Geist, Instrument_Serif } from "next/font/google";
+import { Fredoka, Nunito } from "next/font/google";
 
 import "./globals.css";
 
 import { publisherName, siteName, siteUrl } from "@/lib/seo";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
+const nunito = Nunito({
+  variable: "--font-sans",
   subsets: ["latin"],
+  weight: ["400", "500", "600", "700", "800"],
 });
 
-const instrumentSerif = Instrument_Serif({
+const fredoka = Fredoka({
   variable: "--font-display",
   subsets: ["latin"],
-  weight: "400",
+  weight: ["400", "500", "600", "700"],
 });
 
 export const metadata: Metadata = {
@@ -77,7 +78,7 @@ export default function RootLayout({
 }: Readonly<{ children: React.ReactNode }>) {
   return (
     <html lang="en">
-      <body className={`${geistSans.variable} ${instrumentSerif.variable}`}>
+      <body className={`${nunito.variable} ${fredoka.variable}`}>
         {children}
       </body>
     </html>

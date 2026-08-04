@@ -22,17 +22,12 @@ export function AppTile({ app }: { app: DirectoryApp }) {
       </div>
 
       <div className="app-tile__body">
-        <div className="app-tile__meta">
-          <span>{app.category}</span>
-          <span className="app-tile__status">
-            <span className="app-tile__status-dot" aria-hidden="true" />
-            {app.status}
-          </span>
+        <div>
+          <p className="app-tile__category">{app.category}</p>
+          <h3>{app.name}</h3>
+          <p className="app-tile__description">{app.description}</p>
         </div>
-        <h3>{app.name}</h3>
-        <p>{app.description}</p>
-        <span className="app-tile__cta">
-          Open {app.name}
+        <span className="app-tile__arrow" aria-hidden="true">
           <ArrowUpRight aria-hidden="true" />
         </span>
       </div>

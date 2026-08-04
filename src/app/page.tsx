@@ -1,4 +1,4 @@
-import { ArrowDown, ArrowUpRight, FileStack } from "lucide-react";
+import { ArrowDown } from "lucide-react";
 
 import { AppTile } from "@/components/app-tile";
 import { SiteShell } from "@/components/site-shell";
@@ -24,45 +24,24 @@ export default function Home() {
           <div className="landing-hero__copy">
             <p className="eyebrow">
               <span className="eyebrow__rule" aria-hidden="true" />
-              A small collection by KJR Labs
+              Small web tools by KJR Labs
             </p>
             <h1 id="page-title">
-              Useful tools for the <span>work in between.</span>
+              Useful tools for everyday work.
             </h1>
             <p className="landing-hero__lede">
-              Focused apps for the small tasks that keep things moving.
+              Simple web apps for the little tasks that keep things moving.
             </p>
             <a className="text-link" href="#apps">
-              Browse the collection
+              See the tools
               <ArrowDown aria-hidden="true" />
             </a>
           </div>
-
-          <aside className="collection-note" aria-label="AZ Tools collection note">
-            <div className="collection-note__topline">
-              <span>AZ / 001</span>
-              <span>Live collection</span>
-            </div>
-            <div className="collection-note__icon" aria-hidden="true">
-              <FileStack strokeWidth={1.4} />
-            </div>
-            <p>One useful thing at a time.</p>
-            <a className="collection-note__link" href="#apps">
-              See what is available
-              <ArrowUpRight aria-hidden="true" />
-            </a>
-          </aside>
         </section>
 
         <section className="apps-section" id="apps" aria-labelledby="apps-title">
           <div className="section-heading">
-            <div>
-              <p className="eyebrow">Available now</p>
-              <h2 id="apps-title">Start with PDF World.</h2>
-            </div>
-            <p>
-              The first app on the shelf is ready when you are. More focused tools will join it over time.
-            </p>
+            <h2 id="apps-title">Tools</h2>
           </div>
 
           <div className="app-grid">
@@ -70,11 +49,6 @@ export default function Home() {
               <AppTile key={app.id} app={app} />
             ))}
           </div>
-
-          <p className="future-note">
-            <span aria-hidden="true">+</span>
-            More tools will join this shelf over time.
-          </p>
         </section>
       </main>
     </SiteShell>
