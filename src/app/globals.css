@@ -273,17 +273,17 @@ button {
 .app-tile {
   display: block;
   width: 100%;
-  max-width: 340px;
+  max-width: 272px;
   overflow: hidden;
   border: 2px solid var(--ink);
-  border-radius: 18px;
+  border-radius: 14px;
   background: var(--white);
   transition: transform 180ms ease, box-shadow 180ms ease;
 }
 
 .app-tile:hover {
-  transform: translateY(-4px);
-  box-shadow: 6px 7px 0 var(--accent-soft);
+  transform: translateY(-3px);
+  box-shadow: 5px 6px 0 var(--accent-soft);
 }
 
 .app-tile__visual {
@@ -292,7 +292,7 @@ button {
   aspect-ratio: 1.55;
   align-items: flex-end;
   overflow: hidden;
-  padding: 16px;
+  padding: 13px;
   background: var(--accent);
 }
 
@@ -308,8 +308,8 @@ button {
   position: absolute;
   top: -44px;
   right: -28px;
-  width: 150px;
-  height: 150px;
+  width: 120px;
+  height: 120px;
   border-radius: 50%;
   background: var(--accent-soft);
   content: "";
@@ -321,7 +321,7 @@ button {
   z-index: 1;
   color: var(--white);
   font-family: var(--display);
-  font-size: clamp(2.4rem, 5vw, 4rem);
+  font-size: clamp(1.95rem, 4vw, 3.2rem);
   font-weight: 600;
   letter-spacing: -0.08em;
   line-height: 0.78;
@@ -330,11 +330,11 @@ button {
 .app-tile__sheet {
   position: absolute;
   z-index: 2;
-  width: 76px;
-  height: 98px;
+  width: 61px;
+  height: 78px;
   border: 2px solid var(--ink);
   background: var(--white);
-  box-shadow: 5px 5px 0 color-mix(in srgb, var(--ink) 18%, transparent);
+  box-shadow: 4px 4px 0 color-mix(in srgb, var(--ink) 18%, transparent);
   transform: rotate(8deg);
 }
 
@@ -351,35 +351,35 @@ button {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 10px;
-  padding: 16px 10px;
+  gap: 8px;
+  padding: 13px 8px;
   color: var(--accent-deep);
 }
 
 .app-tile__sheet-icon {
-  width: 24px;
-  height: 24px;
+  width: 19px;
+  height: 19px;
 }
 
 .app-tile__sheet-lines {
-  width: 50px;
-  height: 24px;
+  width: 40px;
+  height: 19px;
   background: repeating-linear-gradient(to bottom, var(--accent-soft) 0 3px, transparent 3px 8px);
 }
 
 .app-tile__body {
   display: flex;
-  min-height: 112px;
+  min-height: 90px;
   align-items: flex-start;
   justify-content: space-between;
-  gap: 16px;
-  padding: 16px 18px 18px;
+  gap: 13px;
+  padding: 13px 14px 14px;
 }
 
 .app-tile__category {
-  margin: 0 0 4px;
+  margin: 0 0 3px;
   color: var(--accent);
-  font-size: 0.68rem;
+  font-size: 0.64rem;
   font-weight: 800;
   letter-spacing: 0.08em;
   text-transform: uppercase;
@@ -388,7 +388,7 @@ button {
 .app-tile h3 {
   margin: 0;
   font-family: var(--display);
-  font-size: 1.55rem;
+  font-size: 1.24rem;
   font-style: normal;
   font-weight: 500;
   letter-spacing: -0.04em;
@@ -396,17 +396,17 @@ button {
 }
 
 .app-tile__description {
-  max-width: 16rem;
-  margin: 7px 0 0;
+  max-width: 13rem;
+  margin: 6px 0 0;
   color: var(--muted);
-  font-size: 0.86rem;
+  font-size: 0.75rem;
   line-height: 1.45;
 }
 
 .app-tile__arrow {
   display: grid;
-  width: 34px;
-  height: 34px;
+  width: 27px;
+  height: 27px;
   flex: 0 0 auto;
   place-items: center;
   border: 1px solid var(--line);
