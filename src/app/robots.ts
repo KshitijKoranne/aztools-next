@@ -5,8 +5,8 @@ export default function robots(): MetadataRoute.Robots {
     rules: [
       {
         userAgent: "*",
-        allow: ["/", "/tools/", "/category/"],
-        disallow: ["/search?*"],
+        allow: ["/", "/privacy-policy"],
+        disallow: ["/tools/", "/category/", "/search", "/api/"],
       },
     ],
     sitemap: "https://aztools.in/sitemap.xml",

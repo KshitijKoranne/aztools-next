@@ -4,11 +4,11 @@ export default function manifest(): MetadataRoute.Manifest {
   return {
     name: "AZ Tools",
     short_name: "AZ Tools",
-    description: "Professional online toolkit. 90+ free tools.",
+    description: "A small collection of useful apps by KJR Labs.",
     start_url: "/",
     display: "standalone",
-    background_color: "#ffffff",
-    theme_color: "#2563eb",
+    background_color: "#f2efe8",
+    theme_color: "#f2efe8",
     icons: [
       {
         src: "/android-chrome-192x192.png",

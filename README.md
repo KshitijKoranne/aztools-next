@@ -1,16 +1,15 @@
 # AZ Tools
 
-Professional online toolkit. 90+ free tools for developers, creators, and professionals.
+A small, calm directory of useful applications by KJR Labs.
 
 Live: [aztools.in](https://aztools.in)
 
 ## Stack
 
-- Next.js 16 (App Router, Turbopack)
+- Next.js 16 App Router
 - React 19
-- Tailwind CSS v4
-- shadcn/ui
 - TypeScript
+- CSS design tokens
 
 ## Development
 
@@ -19,6 +18,8 @@ npm install
 npm run dev
 ```
 
-## Status
+## Current collection
 
-Full rewrite from React + Vite to Next.js for SEO. In active migration.
+- [PDF World](https://pdfworld.aztools.in/) — work with PDF files in your browser.
+
+The directory intentionally starts small. New public applications will be added one at a time.

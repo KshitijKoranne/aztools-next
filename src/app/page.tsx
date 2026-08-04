@@ -1,56 +1,82 @@
-import { CategoryCard } from "@/components/category-card";
-import { HomeHero } from "@/components/home-hero";
-import { MainLayout } from "@/components/layouts/main-layout";
-import { categories, getToolsByCategory } from "@/data/tools";
-import { jsonLd, siteUrl } from "@/lib/seo";
+import { ArrowDown, ArrowUpRight, FileStack } from "lucide-react";
+
+import { AppTile } from "@/components/app-tile";
+import { SiteShell } from "@/components/site-shell";
+import { directoryApps } from "@/data/apps";
+import { jsonLd, siteName, siteUrl } from "@/lib/seo";
 
 export default function Home() {
   return (
-    <MainLayout>
+    <SiteShell>
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={jsonLd({
           "@context": "https://schema.org",
-          "@type": "ItemList",
-          name: "AZ Tools categories",
-          itemListElement: categories.map((category, index) => ({
-            "@type": "ListItem",
-            position: index + 1,
-            name: category.name,
-            url: `${siteUrl}/category/${category.id}`,
-          })),
+          "@type": "WebSite",
+          name: siteName,
+          url: siteUrl,
+          description: "A small collection of useful apps by KJR Labs.",
         })}
       />
 
-      <HomeHero />
-
-      <section id="categories" className="bg-background px-6 py-12 text-foreground md:py-20">
-        <div className="mx-auto max-w-[1200px]">
-          <div className="mb-12">
-            <div>
-              <h2 className="text-[32px] font-semibold leading-tight tracking-[-0.02em] text-foreground">
-                Choose a category
-              </h2>
-              <p className="mt-2 max-w-2xl text-base leading-7 text-muted-foreground">
-                Convert, compress, calculate, inspect, generate, and clean up everyday work from one place.
-              </p>
-            </div>
+      <main id="main-content">
+        <section className="landing-hero" aria-labelledby="page-title">
+          <div className="landing-hero__copy">
+            <p className="eyebrow">
+              <span className="eyebrow__rule" aria-hidden="true" />
+              A small collection by KJR Labs
+            </p>
+            <h1 id="page-title">
+              Useful tools for the <span>work in between.</span>
+            </h1>
+            <p className="landing-hero__lede">
+              Focused apps for the small tasks that keep things moving.
+            </p>
+            <a className="text-link" href="#apps">
+              Browse the collection
+              <ArrowDown aria-hidden="true" />
+            </a>
           </div>
 
-          <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
-            {categories.map((category) => (
-              <CategoryCard
-                key={category.id}
-                id={category.id}
-                name={category.name}
-                description={category.description}
-                icon={category.icon}
-                toolCount={getToolsByCategory(category.id).length}
-              />
+          <aside className="collection-note" aria-label="AZ Tools collection note">
+            <div className="collection-note__topline">
+              <span>AZ / 001</span>
+              <span>Live collection</span>
+            </div>
+            <div className="collection-note__icon" aria-hidden="true">
+              <FileStack strokeWidth={1.4} />
+            </div>
+            <p>One useful thing at a time.</p>
+            <a className="collection-note__link" href="#apps">
+              See what is available
+              <ArrowUpRight aria-hidden="true" />
+            </a>
+          </aside>
+        </section>
+
+        <section className="apps-section" id="apps" aria-labelledby="apps-title">
+          <div className="section-heading">
+            <div>
+              <p className="eyebrow">Available now</p>
+              <h2 id="apps-title">Start with PDF World.</h2>
+            </div>
+            <p>
+              The first app on the shelf is ready when you are. More focused tools will join it over time.
+            </p>
+          </div>
+
+          <div className="app-grid">
+            {directoryApps.map((app) => (
+              <AppTile key={app.id} app={app} />
             ))}
           </div>
-        </div>
-      </section>
-    </MainLayout>
+
+          <p className="future-note">
+            <span aria-hidden="true">+</span>
+            More tools will join this shelf over time.
+          </p>
+        </section>
+      </main>
+    </SiteShell>
   );
 }
